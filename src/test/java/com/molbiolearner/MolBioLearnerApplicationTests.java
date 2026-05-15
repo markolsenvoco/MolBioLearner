@@ -1,0 +1,13 @@
+package com.molbiolearner;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class MolBioLearnerApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

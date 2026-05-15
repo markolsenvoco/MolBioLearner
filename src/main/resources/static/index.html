@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MolBioLearner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dna: { 50:'#f0fdf4', 100:'#dcfce7', 500:'#22c55e', 600:'#16a34a', 700:'#15803d' },
+            rna: { 500:'#f59e0b', 600:'#d97706' },
+            protein: { 500:'#8b5cf6', 600:'#7c3aed' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    [x-cloak] { display: none !important; }
+    .module-card:hover { transform: translateY(-2px); transition: all 0.2s; }
+    .prose-lesson h2 { font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: #1e3a5f; }
+    .prose-lesson h3 { font-size: 1.2rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: #2d5986; }
+    .prose-lesson p  { margin: 0.75rem 0; line-height: 1.8; color: #374151; }
+    .prose-lesson ul { list-style: disc; padding-left: 1.5rem; margin: 0.75rem 0; color: #374151; }
+    .prose-lesson .callout { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; border-radius: 0 0.5rem 0.5rem 0; margin: 1rem 0; }
+    .prose-lesson .key-term { font-weight: 700; color: #1d4ed8; cursor: help; border-bottom: 1px dashed #93c5fd; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen" x-data="app()" x-init="init()">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <button @click="view='home'" class="flex items-center gap-2 font-bold text-xl text-blue-800 hover:text-blue-600">
+        🧬 MolBioLearner
+      </button>
+      <div class="flex items-center gap-4">
+        <button @click="view='home'" :class="view==='home'?'text-blue-700 font-semibold':'text-gray-600 hover:text-blue-700'" class="text-sm transition-colors">Curriculum</button>
+        <button @click="showProgress()" :class="view==='progress'?'text-blue-700 font-semibold':'text-gray-600 hover:text-blue-700'" class="text-sm transition-colors">My Progress</button>
+        <template x-if="!userInfo">
+          <a href="/oauth2/authorization/github" class="bg-blue-700 text-white text-sm px-3 py-1.5 rounded-lg hover:bg-blue-800 transition-colors">Sign in with GitHub</a>
+        </template>
+        <template x-if="userInfo">
+          <div class="flex items-center gap-2">
+            <img :src="userInfo.avatar" class="w-7 h-7 rounded-full" :alt="userInfo.name">
+            <span class="text-sm text-gray-700" x-text="userInfo.name"></span>
+            <a href="/logout" class="text-xs text-gray-400 hover:text-red-500 ml-1">sign out</a>
+          </div>
+        </template>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home: Curriculum -->
+  <main x-show="view==='home'" x-cloak class="max-w-6xl mx-auto px-4 py-10">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-blue-900 mb-3">Learn Molecular Biology</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">From organic chemistry fundamentals to graduate-level molecular biology. Interactive lessons, quizzes, and progress tracking.</p>
+    </div>
+
+    <div x-show="loading" class="text-center py-16 text-gray-400">
+      <div class="animate-spin text-4xl mb-4">⚛️</div>
+      <p>Loading curriculum…</p>
+    </div>
+
+    <div x-show="!loading" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <template x-for="mod in modules" :key="mod.id">
+        <div class="module-card bg-white rounded-2xl shadow-sm border border-gray-100 p-6 cursor-pointer"
+             @click="openModule(mod)">
+          <div class="flex items-start justify-between mb-3">
+            <span class="text-4xl" x-text="mod.icon"></span>
+            <span class="text-xs font-semibold px-2 py-1 rounded-full"
+                  :class="levelBadge(mod.level)" x-text="'Level '+mod.level"></span>
+          </div>
+          <h2 class="text-xl font-bold text-gray-900 mb-1" x-text="mod.title"></h2>
+          <p class="text-sm text-gray-500 mb-4" x-text="mod.description"></p>
+          <div class="flex items-center justify-between text-xs text-gray-400">
+            <span x-text="mod.lessons.length + ' lessons'"></span>
+            <span x-show="progress[mod.id]" class="text-green-600 font-semibold"
+                  x-text="progress[mod.id]?.completed + '/' + mod.lessons.length + ' done'"></span>
+          </div>
+          <div class="mt-3 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div class="h-full bg-green-500 rounded-full transition-all duration-500"
+                 :style="'width:' + progressPct(mod) + '%'"></div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </main>
+
+  <!-- Module lesson list -->
+  <main x-show="view==='module'" x-cloak class="max-w-4xl mx-auto px-4 py-10">
+    <button @click="view='home'" class="text-sm text-blue-600 hover:underline mb-6 flex items-center gap-1">
+      ← Back to Curriculum
+    </button>
+    <template x-if="currentModule">
+      <div>
+        <div class="flex items-center gap-4 mb-8">
+          <span class="text-5xl" x-text="currentModule.icon"></span>
+          <div>
+            <h1 class="text-3xl font-bold text-blue-900" x-text="currentModule.title"></h1>
+            <p class="text-gray-500 mt-1" x-text="currentModule.description"></p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <template x-for="(lesson, idx) in currentModule.lessons" :key="lesson.id">
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex items-center justify-between hover:border-blue-200 transition-colors cursor-pointer"
+                 @click="openLesson(lesson)">
+              <div class="flex items-center gap-4">
+                <span class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 text-sm font-bold flex items-center justify-center flex-shrink-0"
+                      x-text="idx+1"></span>
+                <div>
+                  <p class="font-semibold text-gray-800" x-text="lesson.title"></p>
+                  <p class="text-xs text-gray-400" x-text="lesson.duration + ' min · ' + lesson.quizCount + ' questions'"></p>
+                </div>
+              </div>
+              <span x-show="isCompleted(lesson.id)" class="text-green-500 text-xl">✓</span>
+              <span x-show="!isCompleted(lesson.id)" class="text-gray-300 text-xl">›</span>
+            </div>
+          </template>
+        </div>
+      </div>
+    </template>
+  </main>
+
+  <!-- Lesson view -->
+  <main x-show="view==='lesson'" x-cloak class="max-w-3xl mx-auto px-4 py-10">
+    <button @click="view='module'" class="text-sm text-blue-600 hover:underline mb-6 flex items-center gap-1">
+      ← Back to <span x-text="currentModule?.title"></span>
+    </button>
+
+    <div x-show="lessonLoading" class="text-center py-16 text-gray-400">
+      <div class="animate-spin text-4xl mb-4">🔬</div>
+      <p>Loading lesson…</p>
+    </div>
+
+    <template x-if="currentLesson && !lessonLoading">
+      <div>
+        <h1 class="text-3xl font-bold text-blue-900 mb-2" x-text="currentLesson.title"></h1>
+        <p class="text-sm text-gray-400 mb-8" x-text="currentLesson.duration + ' min read'"></p>
+
+        <!-- Lesson content sections -->
+        <div class="prose-lesson mb-12 space-y-2">
+          <template x-for="section in currentLesson.sections" :key="section.id">
+            <div>
+              <div x-show="section.type==='text'" x-html="section.content"></div>
+              <div x-show="section.type==='callout'" class="callout" x-html="section.content"></div>
+              <div x-show="section.type==='image'" class="my-4 text-center">
+                <img :src="section.src" :alt="section.caption" class="mx-auto rounded-lg max-h-64 border border-gray-100">
+                <p class="text-xs text-gray-400 mt-1" x-text="section.caption"></p>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Quiz -->
+        <div x-show="currentLesson.quiz" class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+          <h2 class="text-xl font-bold text-blue-800 mb-1">📝 Quiz</h2>
+          <p class="text-sm text-gray-400 mb-6" x-text="currentLesson.quiz?.questions?.length + ' questions — score ≥70% to complete the lesson'"></p>
+
+          <div x-show="!quizSubmitted">
+            <template x-for="(q, qi) in currentLesson.quiz.questions" :key="q.id">
+              <div class="mb-6">
+                <p class="font-semibold text-gray-800 mb-3" x-text="(qi+1) + '. ' + q.question"></p>
+                <template x-for="(opt, oi) in q.options" :key="oi">
+                  <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 hover:bg-blue-50 cursor-pointer mb-2 transition-colors"
+                         :class="quizAnswers[q.id]===oi ? 'border-blue-400 bg-blue-50' : ''">
+                    <input type="radio" :name="q.id" :value="oi" x-model.number="quizAnswers[q.id]" class="accent-blue-600">
+                    <span class="text-sm text-gray-700" x-text="opt"></span>
+                  </label>
+                </template>
+              </div>
+            </template>
+            <button @click="submitQuiz()"
+                    :disabled="!allAnswered()"
+                    class="w-full py-3 rounded-xl font-semibold text-white transition-colors"
+                    :class="allAnswered() ? 'bg-blue-700 hover:bg-blue-800' : 'bg-gray-300 cursor-not-allowed'">
+              Submit Quiz
+            </button>
+          </div>
+
+          <!-- Results -->
+          <div x-show="quizSubmitted" class="text-center">
+            <div class="text-6xl mb-3" x-text="quizScore >= 70 ? '🎉' : '📖'"></div>
+            <p class="text-2xl font-bold mb-1" x-text="quizScore + '%'"></p>
+            <p class="text-gray-500 mb-4" x-text="quizScore>=70 ? 'Lesson complete! Great work.' : 'Keep studying — you need 70% to pass.'"></p>
+            <div class="space-y-3 text-left mb-6">
+              <template x-for="(q, qi) in currentLesson.quiz.questions" :key="q.id">
+                <div class="p-3 rounded-lg" :class="quizAnswers[q.id]===q.correct ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'">
+                  <p class="text-sm font-semibold mb-1" x-text="(qi+1)+'. '+q.question"></p>
+                  <p class="text-xs" :class="quizAnswers[q.id]===q.correct ? 'text-green-700' : 'text-red-700'"
+                     x-text="quizAnswers[q.id]===q.correct ? '✓ Correct' : '✗ Correct answer: ' + q.options[q.correct]"></p>
+                  <p class="text-xs text-gray-500 mt-1 italic" x-text="q.explanation"></p>
+                </div>
+              </template>
+            </div>
+            <div class="flex gap-3">
+              <button @click="retryQuiz()" class="flex-1 py-2 rounded-xl border border-blue-300 text-blue-700 hover:bg-blue-50 font-semibold text-sm">Try Again</button>
+              <button @click="view='module'" class="flex-1 py-2 rounded-xl bg-blue-700 text-white hover:bg-blue-800 font-semibold text-sm">Next Lesson →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </main>
+
+  <!-- Progress dashboard -->
+  <main x-show="view==='progress'" x-cloak class="max-w-4xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold text-blue-900 mb-8">My Progress</h1>
+    <template x-if="!userInfo">
+      <div class="text-center py-16">
+        <p class="text-gray-500 mb-4">Sign in to track your progress across sessions.</p>
+        <a href="/oauth2/authorization/github" class="bg-blue-700 text-white px-6 py-2 rounded-xl hover:bg-blue-800 font-semibold">Sign in with GitHub</a>
+      </div>
+    </template>
+    <template x-if="userInfo && summary">
+      <div>
+        <div class="grid grid-cols-3 gap-4 mb-8">
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+            <p class="text-3xl font-bold text-blue-700" x-text="summary.totalLessonsCompleted"></p>
+            <p class="text-sm text-gray-500 mt-1">Lessons Completed</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+            <p class="text-3xl font-bold text-purple-600" x-text="summary.totalQuizAttempts"></p>
+            <p class="text-sm text-gray-500 mt-1">Quiz Attempts</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+            <p class="text-3xl font-bold text-green-600" x-text="summary.averageScore + '%'"></p>
+            <p class="text-sm text-gray-500 mt-1">Average Score</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <template x-for="mod in modules" :key="mod.id">
+            <div class="bg-white rounded-xl border border-gray-100 p-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-semibold text-gray-800" x-text="mod.icon + ' ' + mod.title"></span>
+                <span class="text-sm text-gray-400" x-text="(progress[mod.id]?.completed||0) + '/' + mod.lessons.length"></span>
+              </div>
+              <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 rounded-full transition-all duration-700"
+                     :style="'width:' + progressPct(mod) + '%'"></div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </template>
+  </main>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

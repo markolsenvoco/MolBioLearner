@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: MolBioLearner
+
+  datasource:
+    url: jdbc:h2:mem:molbiolearner;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID:dev-placeholder}
+            client-secret: ${GITHUB_CLIENT_SECRET:dev-placeholder}
+            scope: read:user,user:email
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  dev-mode: ${DEV_MODE:true}

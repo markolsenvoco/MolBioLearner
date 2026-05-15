@@ -1,0 +1,58 @@
+{
+  "modules": [
+    {
+      "id": "orgchem",
+      "title": "Organic Chemistry",
+      "description": "Atoms, bonds, functional groups, and the building blocks of life's molecules.",
+      "icon": "🧪",
+      "level": 1,
+      "lessons": [
+        { "id": "atoms-and-bonds",   "title": "Atoms, Electrons & Chemical Bonds", "duration": 15, "quizCount": 5 },
+        { "id": "functional-groups", "title": "Functional Groups",                 "duration": 12, "quizCount": 5 },
+        { "id": "isomers",           "title": "Isomers & Chirality",               "duration": 10, "quizCount": 4 },
+        { "id": "reactions",         "title": "Key Organic Reactions",             "duration": 15, "quizCount": 5 }
+      ]
+    },
+    {
+      "id": "biochem",
+      "title": "Biochemistry",
+      "description": "The four classes of biomolecules, metabolism, and enzyme function.",
+      "icon": "🔬",
+      "level": 2,
+      "lessons": [
+        { "id": "amino-acids",    "title": "Amino Acids & Protein Structure", "duration": 18, "quizCount": 6 },
+        { "id": "nucleotides",    "title": "Nucleotides & Nucleic Acid Structure", "duration": 15, "quizCount": 5 },
+        { "id": "carbs-lipids",   "title": "Carbohydrates & Lipids",          "duration": 12, "quizCount": 5 },
+        { "id": "enzymes",        "title": "Enzyme Kinetics & Catalysis",     "duration": 20, "quizCount": 6 },
+        { "id": "metabolism",     "title": "Central Metabolic Pathways",      "duration": 25, "quizCount": 7 }
+      ]
+    },
+    {
+      "id": "molbio",
+      "title": "Molecular Biology",
+      "description": "DNA replication, transcription, translation, and gene regulation.",
+      "icon": "🧬",
+      "level": 3,
+      "lessons": [
+        { "id": "dna-replication",   "title": "DNA Replication",              "duration": 20, "quizCount": 6 },
+        { "id": "transcription",     "title": "Transcription & RNA Processing","duration": 18, "quizCount": 6 },
+        { "id": "translation",       "title": "Translation & the Ribosome",   "duration": 20, "quizCount": 6 },
+        { "id": "gene-regulation",   "title": "Gene Regulation",              "duration": 22, "quizCount": 7 },
+        { "id": "techniques",        "title": "Essential Lab Techniques",     "duration": 25, "quizCount": 8 }
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced / Graduate",
+      "description": "Epigenetics, CRISPR, signal transduction, and omics technologies.",
+      "icon": "🎓",
+      "level": 4,
+      "lessons": [
+        { "id": "epigenetics",       "title": "Epigenetics & Chromatin",      "duration": 25, "quizCount": 7 },
+        { "id": "crispr",            "title": "CRISPR-Cas9 & Gene Editing",   "duration": 22, "quizCount": 6 },
+        { "id": "signal-transduction","title": "Signal Transduction Pathways","duration": 28, "quizCount": 8 },
+        { "id": "omics",             "title": "Genomics, Proteomics & Omics", "duration": 25, "quizCount": 7 }
+      ]
+    }
+  ]
+}
