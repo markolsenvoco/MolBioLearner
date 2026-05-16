@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -20,6 +22,9 @@ public class SecurityConfig {
 
     @Autowired
     private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService;
+
+    @Autowired
+    private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -46,7 +51,9 @@ public class SecurityConfig {
 
         http.oauth2Login(oauth2 -> oauth2
                 .defaultSuccessUrl("/", true)
-                .userInfoEndpoint(u -> u.userService(oauth2UserService)))
+                .userInfoEndpoint(u -> u
+                    .userService(oauth2UserService)
+                    .oidcUserService(oidcUserService)))
             .logout(logout -> logout.logoutSuccessUrl("/"));
 
         return http.build();
