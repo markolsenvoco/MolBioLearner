@@ -3,6 +3,7 @@ package com.molbiolearner.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.molbiolearner.service.ProgressService;
+import com.molbiolearner.util.UserIdentity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,7 +25,7 @@ public class QuizController {
     public ResponseEntity<?> submitQuiz(@AuthenticationPrincipal OAuth2User user,
                                          @PathVariable String lessonId,
                                          @RequestBody Map<String, Object> body) throws JsonProcessingException {
-        String userId = userId(user);
+        String userId = UserIdentity.userId(user);
         String moduleId = (String) body.getOrDefault("moduleId", "unknown");
         int score = (int) body.getOrDefault("score", 0);
         int total = (int) body.getOrDefault("total", 0);
@@ -36,10 +37,5 @@ public class QuizController {
         return ResponseEntity.ok(
             progressService.submitQuiz(userId, lessonId, moduleId, score, total, answersJson)
         );
-    }
-
-    private String userId(OAuth2User user) {
-        Object login = user.getAttribute("login");
-        return login != null ? "github:" + login : "user:" + user.getName();
     }
 }

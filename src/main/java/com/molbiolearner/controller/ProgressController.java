@@ -1,6 +1,7 @@
 package com.molbiolearner.controller;
 
 import com.molbiolearner.service.ProgressService;
+import com.molbiolearner.util.UserIdentity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +19,7 @@ public class ProgressController {
 
     @GetMapping
     public ResponseEntity<?> getProgress(@AuthenticationPrincipal OAuth2User user) {
-        String userId = userId(user);
+        String userId = UserIdentity.userId(user);
         return ResponseEntity.ok(Map.of(
             "progress", progressService.getProgress(userId),
             "summary", progressService.getSummary(userId)
@@ -30,12 +31,6 @@ public class ProgressController {
                                          @PathVariable String lessonId,
                                          @RequestBody Map<String, String> body) {
         String moduleId = body.getOrDefault("moduleId", "unknown");
-        return ResponseEntity.ok(progressService.markLessonViewed(userId(user), lessonId, moduleId));
-    }
-
-    private String userId(OAuth2User user) {
-        // Use GitHub login as stable user identifier
-        Object login = user.getAttribute("login");
-        return login != null ? "github:" + login : "user:" + user.getName();
+        return ResponseEntity.ok(progressService.markLessonViewed(UserIdentity.userId(user), lessonId, moduleId));
     }
 }

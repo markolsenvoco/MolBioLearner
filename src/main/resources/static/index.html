@@ -42,7 +42,10 @@
         <button @click="view='home'" :class="view==='home'?'text-blue-700 font-semibold':'text-gray-600 hover:text-blue-700'" class="text-sm transition-colors">Curriculum</button>
         <button @click="showProgress()" :class="view==='progress'?'text-blue-700 font-semibold':'text-gray-600 hover:text-blue-700'" class="text-sm transition-colors">My Progress</button>
         <template x-if="!userInfo">
-          <a href="/oauth2/authorization/github" class="bg-blue-700 text-white text-sm px-3 py-1.5 rounded-lg hover:bg-blue-800 transition-colors">Sign in with GitHub</a>
+          <div class="flex gap-2">
+            <a href="/oauth2/authorization/github" class="bg-gray-900 text-white text-sm px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors">🐙 GitHub</a>
+            <a href="/oauth2/authorization/google" class="bg-red-600 text-white text-sm px-3 py-1.5 rounded-lg hover:bg-red-700 transition-colors">G Google</a>
+          </div>
         </template>
         <template x-if="userInfo">
           <div class="flex items-center gap-2">
