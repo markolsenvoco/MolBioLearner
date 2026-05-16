@@ -32,7 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-### Secrets ###
+### Local H2 database ###
+data/
 application-local.yml
 *.env
 .env
