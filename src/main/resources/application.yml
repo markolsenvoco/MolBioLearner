@@ -41,3 +41,4 @@ management:
 
 app:
   dev-mode: ${DEV_MODE:true}
+  admin-email: ${ADMIN_EMAIL:mark.olsen@gmail.com}
