@@ -140,15 +140,16 @@ function app() {
       this.quizScore = Math.round((correct / questions.length) * 100);
       this.quizSubmitted = true;
 
-      fetch(`/api/quiz/attempt/${this.currentLesson.id}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          moduleId: this.currentModule.id,
-          quizType: 'MULTIPLE_CHOICE',
-          answers
-        })
-      }).then(async res => {
+      try {
+        const res = await fetch(`/api/quiz/attempt/${this.currentLesson.id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            moduleId: this.currentModule.id,
+            quizType: 'MULTIPLE_CHOICE',
+            answers
+          })
+        });
         if (res.ok) {
           const p = await res.json();
           const passed = p.status === 'MARKED' && p.score >= Math.ceil(p.totalQuestions * 0.7);
@@ -157,9 +158,10 @@ function app() {
             const mod = this.progress[this.currentModule.id] || { completed: 0 };
             mod.completed = (mod.completed || 0) + 1;
             this.progress[this.currentModule.id] = mod;
+            if (this.summary) this.summary = { ...this.summary, totalLessonsCompleted: (this.summary.totalLessonsCompleted || 0) + 1 };
           }
         }
-      }).catch(() => {});
+      } catch (e) { console.error('Failed to save quiz attempt', e); }
     },
 
     async submitOpenQuiz() {
