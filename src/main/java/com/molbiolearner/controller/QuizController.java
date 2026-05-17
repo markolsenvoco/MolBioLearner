@@ -1,6 +1,7 @@
 package com.molbiolearner.controller;
 
 import com.molbiolearner.model.QuizType;
+import com.molbiolearner.repository.QuizAnswerRepository;
 import com.molbiolearner.service.QuizService;
 import com.molbiolearner.util.UserIdentity;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/quiz")
@@ -24,6 +27,7 @@ import java.util.Map;
 public class QuizController {
 
     private final QuizService quizService;
+    private final QuizAnswerRepository answerRepo;
 
     @PostMapping("/attempt/{lessonId}")
     public ResponseEntity<?> submitAttempt(@AuthenticationPrincipal OAuth2User user,
@@ -50,5 +54,34 @@ public class QuizController {
             return ResponseEntity.ok(null);
         }
         return ResponseEntity.ok(quizService.getLatestAttempt(UserIdentity.userId(user), lessonId).orElse(null));
+    }
+
+    @GetMapping("/feedback/{lessonId}")
+    public ResponseEntity<?> getFeedback(@AuthenticationPrincipal OAuth2User user,
+                                         @PathVariable String lessonId) {
+        if (user == null) return ResponseEntity.ok(List.of());
+        String userId = UserIdentity.userId(user);
+        List<com.molbiolearner.model.QuizAnswer> answers = answerRepo.findFeedbackByUserIdAndLessonId(userId, lessonId);
+
+        // Group by attemptNumber
+        Map<Integer, Map<String, Object>> byAttempt = new java.util.TreeMap<>();
+        answers.forEach(ans -> {
+            int attemptNum = ans.getAttempt().getAttemptNumber();
+            byAttempt.computeIfAbsent(attemptNum, n -> {
+                Map<String, Object> a = new LinkedHashMap<>();
+                a.put("attemptNumber", n);
+                a.put("submittedAt", ans.getAttempt().getSubmittedAt());
+                a.put("quizType", ans.getAttempt().getQuizType());
+                a.put("answers", new java.util.ArrayList<>());
+                return a;
+            });
+            Map<String, Object> ansMap = new LinkedHashMap<>();
+            ansMap.put("questionId", ans.getQuestionId());
+            ansMap.put("questionText", ans.getQuestionText());
+            ansMap.put("answerData", ans.getAnswerData());
+            ansMap.put("feedback", ans.getFeedback());
+            ((List<Map<String, Object>>) byAttempt.get(attemptNum).get("answers")).add(ansMap);
+        });
+        return ResponseEntity.ok(byAttempt.values());
     }
 }

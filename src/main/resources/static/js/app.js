@@ -16,6 +16,7 @@ function app() {
     openAnswers: {},
     openQuizSubmitted: false,
     previousOpenAttempt: null,
+    lessonFeedback: [],
 
     async init() {
       await Promise.all([this.loadModules(), this.loadUser(), this.loadUserInfo()]);
@@ -72,6 +73,7 @@ function app() {
       this.openAnswers = {};
       this.openQuizSubmitted = false;
       this.previousOpenAttempt = null;
+      this.lessonFeedback = [];
       this.quizSubmitted = false;
       this.quizScore = 0;
       this.view = 'lesson';
@@ -81,6 +83,7 @@ function app() {
         if (this.currentLesson?.quiz?.type === 'open_ended') {
           await this.loadPreviousOpenAnswers(lesson.id);
         }
+        this.loadFeedback(lesson.id);
         fetch(`/api/progress/lesson/${lesson.id}/view`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -114,6 +117,13 @@ function app() {
             });
           }
         }
+      } catch (e) {}
+    },
+
+    async loadFeedback(lessonId) {
+      try {
+        const res = await fetch(`/api/quiz/feedback/${lessonId}`);
+        if (res.ok) this.lessonFeedback = await res.json();
       } catch (e) {}
     },
 
@@ -194,6 +204,13 @@ function app() {
       this.quizAnswers = {};
       this.quizSubmitted = false;
       this.quizScore = 0;
+    },
+
+    tryParseAnswer(answerDataStr) {
+      try {
+        const d = typeof answerDataStr === 'string' ? JSON.parse(answerDataStr) : answerDataStr;
+        return d?.answer || d?.text || '';
+      } catch (e) { return ''; }
     },
 
     isCompleted(lessonId) {

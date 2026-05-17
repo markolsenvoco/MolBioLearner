@@ -5,7 +5,11 @@ import com.molbiolearner.model.QuizAttempt;
 import com.molbiolearner.repository.QuizAnswerRepository;
 import com.molbiolearner.repository.QuizAttemptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -78,6 +82,7 @@ public class AdminController {
                     ans.put("questionId", a.getQuestionId());
                     ans.put("questionText", a.getQuestionText());
                     ans.put("answerData", parseJsonSafely(a.getAnswerData()));
+                    ans.put("answerId", a.getId());
                     ans.put("score", a.getScore());
                     ans.put("feedback", a.getFeedback());
                     return ans;
@@ -104,5 +109,18 @@ public class AdminController {
         } catch (Exception e) {
             return json;
         }
+    }
+
+    @PutMapping("/answers/{answerId}/feedback")
+    public ResponseEntity<?> saveFeedback(@PathVariable Long answerId,
+                                          @RequestBody Map<String, String> body) {
+        return answerRepo.findById(answerId).map(answer -> {
+            answer.setFeedback(body.getOrDefault("feedback", "").isBlank() ? null : body.get("feedback").strip());
+            answerRepo.save(answer);
+            Map<String, Object> resp = new LinkedHashMap<>();
+            resp.put("answerId", answer.getId());
+            resp.put("feedback", answer.getFeedback());
+            return ResponseEntity.ok(resp);
+        }).orElse(ResponseEntity.notFound().build());
     }
 }

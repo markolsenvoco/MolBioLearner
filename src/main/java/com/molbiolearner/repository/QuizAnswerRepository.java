@@ -15,4 +15,7 @@ public interface QuizAnswerRepository extends JpaRepository<QuizAnswer, Long> {
 
     @Query("SELECT an FROM QuizAnswer an JOIN an.attempt a WHERE a.userId = ?1 AND a.lessonId = ?2 AND an.questionId = ?3 ORDER BY a.attemptNumber ASC")
     List<QuizAnswer> findByUserIdLessonIdAndQuestionId(String userId, String lessonId, String questionId);
+
+    @Query("SELECT an FROM QuizAnswer an JOIN an.attempt a WHERE a.userId = ?1 AND a.lessonId = ?2 AND an.feedback IS NOT NULL ORDER BY a.attemptNumber ASC, an.questionId ASC")
+    List<QuizAnswer> findFeedbackByUserIdAndLessonId(String userId, String lessonId);
 }
