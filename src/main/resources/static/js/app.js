@@ -123,7 +123,15 @@ function app() {
     async loadFeedback(lessonId) {
       try {
         const res = await fetch(`/api/quiz/feedback/${lessonId}`);
-        if (res.ok) this.lessonFeedback = await res.json();
+        if (res.ok) {
+          this.lessonFeedback = await res.json();
+          // Clear pre-filled answer for any question that has received feedback
+          Object.keys(this.lessonFeedback).forEach(qId => {
+            if (this.lessonFeedback[qId]?.length > 0) {
+              delete this.openAnswers[qId];
+            }
+          });
+        }
       } catch (e) {}
     },
 
