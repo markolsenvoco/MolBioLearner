@@ -20,9 +20,6 @@ public class SecurityConfig {
     @Value("${app.dev-mode:true}")
     private boolean devMode;
 
-    @Value("${app.local-network:192.168.0.0/24}")
-    private String localNetwork;
-
     @Autowired
     private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService;
 
@@ -33,33 +30,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                // H2 console: local network OR logged-in admin
-                .requestMatchers("/h2-console/**")
-                    .access((authSupplier, context) -> {
-                        var req = context.getRequest();
-                        if (isLocalNetwork(req.getRemoteAddr())) {
-                            return new org.springframework.security.authorization.AuthorizationDecision(true);
-                        }
-                        var authentication = authSupplier.get();
-                        return new org.springframework.security.authorization.AuthorizationDecision(
-                            authentication.getAuthorities().stream()
-                                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))
-                        );
-                    })
+                // H2 console: must be logged in AND have ROLE_ADMIN (admin email only)
+                .requestMatchers("/h2-console/**").hasRole("ADMIN")
                 // Public
                 .requestMatchers("/", "/index.html", "/js/**", "/content/**",
                                  "/api/modules/**", "/api/lessons/**",
-                                 "/actuator/health", "/api/debug/**").permitAll()
-                // Local network: full access without login
-                .requestMatchers("/api/progress/**", "/api/quiz/submit/**")
-                    .access((authSupplier, context) -> {
-                        if (isLocalNetwork(context.getRequest().getRemoteAddr())) {
-                            return new org.springframework.security.authorization.AuthorizationDecision(true);
-                        }
-                        return new org.springframework.security.authorization.AuthorizationDecision(
-                            authSupplier.get().isAuthenticated()
-                        );
-                    })
+                                 "/actuator/health").permitAll()
+                // Authenticated: progress and quiz
+                .requestMatchers("/api/progress/**", "/api/quiz/submit/**").authenticated()
                 .anyRequest().permitAll()
             );
 
@@ -79,13 +57,5 @@ public class SecurityConfig {
             .logout(logout -> logout.logoutSuccessUrl("/"));
 
         return http.build();
-    }
-
-    private boolean isLocalNetwork(String remoteAddr) {
-        if (remoteAddr == null) return false;
-        return remoteAddr.equals("127.0.0.1")
-            || remoteAddr.equals("0:0:0:0:0:0:0:1")
-            || remoteAddr.startsWith("192.168.0.")
-            || remoteAddr.startsWith("192.168.1.");
     }
 }
