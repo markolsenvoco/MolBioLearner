@@ -36,6 +36,8 @@ public class SecurityConfig {
                 .requestMatchers("/", "/index.html", "/js/**", "/content/**",
                                  "/api/modules/**", "/api/lessons/**", "/api/quiz/previous/**",
                                  "/actuator/health").permitAll()
+                // Admin only
+                .requestMatchers("/admin/**", "/api/admin/**").hasRole("ADMIN")
                 // Authenticated: progress and quiz attempts
                 .requestMatchers("/api/progress/**", "/api/quiz/attempt/**").authenticated()
                 .anyRequest().permitAll()

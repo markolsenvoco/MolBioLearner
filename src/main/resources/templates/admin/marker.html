@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marker — MolBioLearner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- Header -->
+<header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+  <div class="flex items-center gap-4">
+    <a href="/" class="text-blue-600 hover:text-blue-800 text-sm font-medium">← Back to app</a>
+    <span class="text-gray-300">|</span>
+    <h1 class="text-lg font-bold text-blue-900">🔬 MolBioLearner — Marker</h1>
+  </div>
+  <span class="text-xs text-gray-400 hidden sm:block">Admin view — restricted access</span>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-10" x-data="markerApp()" x-init="init()">
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-blue-900 mb-1">Review Student Answers</h2>
+    <p class="text-gray-500 text-sm">Select a student → lesson → question to browse submitted answers.</p>
+  </div>
+
+  <!-- ── Step 1: Select Student ── -->
+  <section class="mb-8">
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Step 1 — Select Student</p>
+    <div x-show="loading && users.length === 0" class="text-gray-400 text-sm italic">Loading…</div>
+    <div x-show="!loading && users.length === 0" class="text-gray-400 text-sm italic">No submissions yet.</div>
+    <div class="flex flex-wrap gap-2" x-show="users.length > 0">
+      <template x-for="u in users" :key="u.userId">
+        <button @click="selectUser(u.userId)"
+                class="border rounded-xl px-4 py-2 text-sm font-medium transition-all"
+                :class="selectedUser === u.userId
+                  ? 'bg-blue-700 text-white border-blue-700 shadow-sm'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-blue-400 hover:shadow-sm'">
+          <span x-text="userLabel(u.userId)"></span>
+          <span class="ml-2 opacity-60 text-xs"
+                x-text="u.attemptCount + ' attempt' + (u.attemptCount == 1 ? '' : 's')"></span>
+        </button>
+      </template>
+    </div>
+  </section>
+
+  <!-- ── Step 2: Select Lesson ── -->
+  <section class="mb-8" x-show="selectedUser" x-cloak>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Step 2 — Select Lesson</p>
+    <div x-show="lessons.length === 0" class="text-gray-400 text-sm italic">No lessons found for this student.</div>
+    <div class="flex flex-wrap gap-2" x-show="lessons.length > 0">
+      <template x-for="l in lessons" :key="l.lessonId">
+        <button @click="selectLesson(l)"
+                class="border rounded-xl px-4 py-2 text-sm font-medium transition-all"
+                :class="selectedLesson?.lessonId === l.lessonId
+                  ? 'bg-blue-700 text-white border-blue-700 shadow-sm'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-blue-400 hover:shadow-sm'">
+          <span class="opacity-60 text-xs" x-text="l.moduleId + ' / '"></span><span x-text="l.lessonId"></span>
+        </button>
+      </template>
+    </div>
+  </section>
+
+  <!-- ── Step 3: Select Question ── -->
+  <section class="mb-8" x-show="selectedLesson" x-cloak>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Step 3 — Select Question</p>
+    <div x-show="questions.length === 0" class="text-gray-400 text-sm italic">No questions found.</div>
+    <div class="flex flex-wrap gap-2" x-show="questions.length > 0">
+      <!-- All questions -->
+      <button @click="selectQuestion('all')"
+              class="border rounded-xl px-4 py-2 text-sm font-medium transition-all"
+              :class="selectedQuestion === 'all'
+                ? 'bg-blue-700 text-white border-blue-700 shadow-sm'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-blue-400 hover:shadow-sm'">
+        All Questions
+      </button>
+      <!-- Individual questions -->
+      <template x-for="q in questions" :key="q.questionId">
+        <button @click="selectQuestion(q.questionId)"
+                class="border rounded-xl px-4 py-2 text-sm font-medium transition-all"
+                :class="selectedQuestion === q.questionId
+                  ? 'bg-blue-700 text-white border-blue-700 shadow-sm'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-blue-400 hover:shadow-sm'"
+                :title="q.questionText">
+          <span x-text="q.questionId.toUpperCase()"></span>
+        </button>
+      </template>
+    </div>
+    <!-- Question text preview -->
+    <div x-show="selectedQuestion && selectedQuestion !== 'all'" class="mt-3 text-sm text-gray-500 italic"
+         x-text="questions.find(q => q.questionId === selectedQuestion)?.questionText"></div>
+  </section>
+
+  <!-- Loading -->
+  <div x-show="loading && selectedQuestion" x-cloak class="flex items-center gap-2 text-gray-400 py-6">
+    <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+    <span class="text-sm">Loading answers…</span>
+  </div>
+
+  <!-- No results -->
+  <div x-show="selectedQuestion && !loading && results.length === 0" x-cloak
+       class="text-center text-gray-400 py-10 text-sm italic">
+    No answers found for this selection.
+  </div>
+
+  <!-- ── Results ── -->
+  <section x-show="results.length > 0 && !loading" x-cloak>
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
+      Results —
+      <span x-text="results.length + ' attempt' + (results.length === 1 ? '' : 's')"></span>
+      <span class="text-blue-600 ml-1" x-text="'for ' + userLabel(selectedUser)"></span>
+      <span class="text-gray-400 ml-1" x-text="'· ' + selectedLesson?.lessonId"></span>
+    </p>
+
+    <template x-for="attempt in results" :key="attempt.attemptNumber">
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm mb-6 overflow-hidden">
+
+        <!-- Attempt header -->
+        <div class="flex items-center justify-between px-6 py-4 bg-gray-50 border-b border-gray-100">
+          <div class="flex items-center gap-3">
+            <span class="font-bold text-blue-900 text-base">
+              Attempt #<span x-text="attempt.attemptNumber"></span>
+            </span>
+            <span class="text-gray-400 text-sm" x-text="formatDate(attempt.submittedAt)"></span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span x-show="attempt.quizType === 'MULTIPLE_CHOICE' && attempt.score !== null"
+                  class="text-sm text-gray-600">
+              Score: <strong x-text="attempt.score + ' / ' + attempt.totalQuestions"></strong>
+              (<span x-text="Math.round(attempt.score / attempt.totalQuestions * 100) + '%'"></span>)
+            </span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full"
+                  :class="attempt.status === 'MARKED'
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-amber-100 text-amber-700'"
+                  x-text="attempt.status"></span>
+            <span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-600 font-medium"
+                  x-text="attempt.quizType === 'MULTIPLE_CHOICE' ? 'Multiple Choice' : 'Open Ended'"></span>
+          </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="px-6 py-6 space-y-8">
+          <template x-for="(ans, idx) in attempt.answers" :key="ans.questionId + idx">
+            <div>
+              <!-- Question label + text -->
+              <p class="font-semibold text-gray-800 mb-4 leading-snug">
+                <span class="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded mr-2 uppercase"
+                      x-text="ans.questionId"></span>
+                <span x-text="ans.answerData?.question || ans.questionText"></span>
+              </p>
+
+              <!-- Multiple choice display -->
+              <div x-show="ans.answerData?.type === 'multiple_choice'">
+                <div class="space-y-2 mb-4">
+                  <template x-for="(opt, optIdx) in (ans.answerData?.options || [])" :key="optIdx">
+                    <div class="flex items-start gap-3 px-4 py-3 rounded-xl border text-sm leading-snug"
+                         :class="{
+                           'bg-green-50 border-green-400': optIdx === ans.answerData.chosen && ans.answerData.isCorrect,
+                           'bg-red-50 border-red-400': optIdx === ans.answerData.chosen && !ans.answerData.isCorrect,
+                           'bg-green-50 border-green-300': optIdx !== ans.answerData.chosen && optIdx === ans.answerData.correct && !ans.answerData.isCorrect,
+                           'bg-gray-50 border-gray-100': optIdx !== ans.answerData.chosen && optIdx !== ans.answerData.correct
+                         }">
+                      <span class="font-bold text-gray-500 shrink-0"
+                            x-text="['A','B','C','D','E'][optIdx] + '.'"></span>
+                      <span class="flex-1" x-text="opt"></span>
+                      <!-- Chosen correct -->
+                      <span x-show="optIdx === ans.answerData.chosen && ans.answerData.isCorrect"
+                            class="shrink-0 text-green-600 font-semibold text-xs">✅ Correct</span>
+                      <!-- Chosen wrong -->
+                      <span x-show="optIdx === ans.answerData.chosen && !ans.answerData.isCorrect"
+                            class="shrink-0 text-red-600 font-semibold text-xs">❌ Chosen</span>
+                      <!-- Right answer (not chosen) -->
+                      <span x-show="optIdx !== ans.answerData.chosen && optIdx === ans.answerData.correct && !ans.answerData.isCorrect"
+                            class="shrink-0 text-green-700 font-semibold text-xs">✅ Correct answer</span>
+                    </div>
+                  </template>
+                </div>
+                <!-- Explanation -->
+                <div x-show="ans.answerData?.explanation"
+                     class="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-sm text-blue-900">
+                  <span class="font-semibold text-blue-700">Explanation: </span>
+                  <span x-text="ans.answerData?.explanation"></span>
+                </div>
+              </div>
+
+              <!-- Open-ended display -->
+              <div x-show="ans.answerData?.type === 'open_ended'">
+                <div x-show="ans.answerData?.answer"
+                     class="bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-sm text-gray-800 leading-relaxed whitespace-pre-wrap"
+                     x-text="ans.answerData?.answer"></div>
+                <div x-show="!ans.answerData?.answer"
+                     class="bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-sm text-gray-400 italic">
+                  No answer provided.
+                </div>
+                <div x-show="ans.feedback"
+                     class="mt-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-sm">
+                  <span class="font-semibold text-blue-700">Feedback: </span>
+                  <span class="text-blue-900" x-text="ans.feedback"></span>
+                </div>
+              </div>
+
+              <!-- Unknown type fallback -->
+              <div x-show="ans.answerData && !ans.answerData?.type">
+                <pre class="bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-xs text-gray-600 overflow-auto"
+                     x-text="JSON.stringify(ans.answerData, null, 2)"></pre>
+              </div>
+
+            </div>
+          </template>
+        </div>
+
+      </div>
+    </template>
+  </section>
+
+</main>
+
+<script>
+function markerApp() {
+  return {
+    users: [],
+    lessons: [],
+    questions: [],
+    results: [],
+    selectedUser: null,
+    selectedLesson: null,
+    selectedQuestion: null,
+    loading: false,
+
+    async init() {
+      this.loading = true;
+      try {
+        const res = await fetch('/api/admin/users');
+        this.users = await res.json();
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async selectUser(userId) {
+      this.selectedUser = userId;
+      this.selectedLesson = null;
+      this.selectedQuestion = null;
+      this.lessons = [];
+      this.questions = [];
+      this.results = [];
+      const res = await fetch('/api/admin/lessons?userId=' + encodeURIComponent(userId));
+      this.lessons = await res.json();
+    },
+
+    async selectLesson(lesson) {
+      this.selectedLesson = lesson;
+      this.selectedQuestion = null;
+      this.questions = [];
+      this.results = [];
+      const res = await fetch('/api/admin/questions?userId=' + encodeURIComponent(this.selectedUser)
+        + '&lessonId=' + encodeURIComponent(lesson.lessonId));
+      this.questions = await res.json();
+    },
+
+    async selectQuestion(questionId) {
+      this.selectedQuestion = questionId;
+      this.loading = true;
+      this.results = [];
+      try {
+        const res = await fetch('/api/admin/answers?userId=' + encodeURIComponent(this.selectedUser)
+          + '&lessonId=' + encodeURIComponent(this.selectedLesson.lessonId)
+          + '&questionId=' + encodeURIComponent(questionId));
+        this.results = await res.json();
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    userLabel(userId) {
+      if (!userId) return '';
+      if (userId.startsWith('google:')) return 'Google …' + userId.slice(-6);
+      if (userId.startsWith('github:')) return 'GitHub @' + userId.replace('github:', '');
+      return userId;
+    },
+
+    formatDate(iso) {
+      if (!iso) return '—';
+      return new Date(iso).toLocaleString();
+    }
+  };
+}
+</script>
+</body>
+</html>

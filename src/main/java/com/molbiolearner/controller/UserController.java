@@ -1,6 +1,7 @@
 package com.molbiolearner.controller;
 
 import com.molbiolearner.util.UserIdentity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,6 +16,9 @@ import java.util.Map;
 @RequestMapping("/api/user")
 public class UserController {
 
+    @Value("${app.admin-email:olsen.mark@gmail.com}")
+    private String adminEmail;
+
     @GetMapping
     public ResponseEntity<?> currentUser(@AuthenticationPrincipal OAuth2User user) {
         if (user == null) return ResponseEntity.status(401).build();
@@ -22,8 +26,9 @@ public class UserController {
         info.put("name",     UserIdentity.displayName(user));
         info.put("avatar",   UserIdentity.avatar(user));
         info.put("userId",   UserIdentity.userId(user));
-        // "github" or "google" — used by frontend to show correct provider icon
         info.put("provider", user.getAttribute("login") != null ? "github" : "google");
+        info.put("isAdmin",  user.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")));
         return ResponseEntity.ok(info);
     }
 }
