@@ -1,0 +1,70 @@
+{
+  "id": "algebra-basics",
+  "moduleId": "alexmaths",
+  "title": "Algebra Basics",
+  "duration": 12,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>What is Algebra?</h2><p>Algebra is the language of mathematics — it lets us write general rules using letters (variables) instead of specific numbers. When we write <strong>2x + 3 = 11</strong>, the letter <em>x</em> represents an unknown we want to find. The power of algebra is that a single rule like <em>A = lw</em> (area = length × width) works for every rectangle, not just one.</p><p>An <strong>expression</strong> is a collection of terms: 3x² − 2x + 7. An <strong>equation</strong> states that two expressions are equal and can be solved. An <strong>identity</strong> is always true (e.g. x + x = 2x for every x).</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Key words:</strong> <em>Term</em> — a single number or product of a number and variables (e.g. 5x², −3y). <em>Coefficient</em> — the number in front of a variable (in 5x², the coefficient is 5). <em>Like terms</em> — terms with the same variable(s) raised to the same power; only like terms can be combined."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Expanding and Factorising</h2><p><strong>Expanding</strong> means removing brackets by multiplying: 3(2x − 5) = 6x − 15. When expanding two brackets, use FOIL (First, Outer, Inner, Last):</p><p style='margin-left:1.5rem'>(x + 3)(x − 2) = x² − 2x + 3x − 6 = x² + x − 6</p><p><strong>Factorising</strong> is the reverse — finding brackets that multiply to give an expression. Start by looking for a common factor: 6x² + 9x = 3x(2x + 3). For trinomials like x² + 5x + 6, look for two numbers that multiply to 6 and add to 5 → (x + 2)(x + 3).</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Solving Linear Equations</h2><p>To solve means to find the value of the unknown. The golden rule: <strong>whatever you do to one side, do to the other</strong>. Work step by step, undoing operations in reverse order (BIDMAS backwards).</p><p>Example: Solve 4x − 7 = 13.<br>Add 7 to both sides: 4x = 20.<br>Divide both sides by 4: x = 5.</p><p>Example with brackets: Solve 3(2x + 1) = 21.<br>Expand: 6x + 3 = 21.<br>Subtract 3: 6x = 18.<br>Divide by 6: x = 3.</p>"
+    },
+    {
+      "id": "s5",
+      "type": "text",
+      "content": "<h2>Substitution and Formulae</h2><p><strong>Substitution</strong> means replacing variables with numbers to evaluate an expression. If v = u + at, and u = 5, a = 3, t = 4, then v = 5 + (3)(4) = 5 + 12 = 17.</p><p><strong>Rearranging formulae</strong> uses the same balance principle as solving equations, but you're isolating a different letter. To make t the subject of v = u + at: subtract u from both sides → v − u = at → divide by a → t = (v − u)/a.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Expand and simplify: (x + 4)(x − 3)",
+        "options": ["x² + x − 12", "x² − x − 12", "x² + 7x − 12", "x² − 12"],
+        "correct": 0,
+        "explanation": "FOIL: x·x = x², x·(−3) = −3x, 4·x = 4x, 4·(−3) = −12. Combine: x² + (−3x + 4x) − 12 = x² + x − 12."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "Factorise: x² − 9",
+        "options": ["(x − 3)²", "(x + 3)(x + 3)", "(x + 3)(x − 3)", "(x − 9)(x + 1)"],
+        "correct": 2,
+        "explanation": "This is a difference of two squares: a² − b² = (a+b)(a−b). Here a = x, b = 3, so x² − 9 = (x+3)(x−3)."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "Solve: 5x + 8 = 33",
+        "options": ["x = 4", "x = 5", "x = 8", "x = 41"],
+        "correct": 1,
+        "explanation": "5x = 33 − 8 = 25, so x = 25 ÷ 5 = 5."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "If y = 3x² − 2x, what is y when x = −2?",
+        "options": ["8", "16", "−4", "−16"],
+        "correct": 1,
+        "explanation": "y = 3(−2)² − 2(−2) = 3(4) + 4 = 12 + 4 = 16."
+      }
+    ]
+  }
+}

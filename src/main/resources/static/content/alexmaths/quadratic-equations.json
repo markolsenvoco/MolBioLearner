@@ -1,0 +1,64 @@
+{
+  "id": "quadratic-equations",
+  "moduleId": "alexmaths",
+  "title": "Solving Quadratic Equations",
+  "duration": 20,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>What is a Quadratic Equation?</h2><p>A <strong>quadratic equation</strong> is any equation that can be written in the form <strong>ax² + bx + c = 0</strong>, where a ≠ 0. The highest power of x is 2 — that's what makes it quadratic (from the Latin <em>quadratus</em>, meaning 'square').</p><p>Examples: x² + 5x + 6 = 0, 2x² − 3x − 2 = 0, x² − 9 = 0. Quadratics appear everywhere — the path of a ball in the air, the area of a rectangle when you set it equal to a number, and profit/cost models in business.</p><p>A quadratic can have <strong>two solutions</strong>, <strong>one solution</strong> (repeated), or <strong>no real solutions</strong>. We'll focus on the case with two solutions.</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Three methods to solve ax² + bx + c = 0:</strong> (1) <em>Factorisation</em> — fastest when it works, used in Singapore curriculum. (2) <em>Completing the square</em> — always works, gives exact form. (3) <em>Quadratic formula</em> — x = (−b ± √(b²−4ac)) / 2a, always works, use when factorisation fails."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>The Singapore Method: Factorisation by Inspection</h2><p>For a <strong>monic quadratic</strong> (a = 1), i.e. x² + bx + c = 0, the Singapore approach is:</p><ol><li>Find two numbers <strong>p</strong> and <strong>q</strong> such that <strong>p × q = c</strong> and <strong>p + q = b</strong></li><li>Write the factorised form: (x + p)(x + q) = 0</li><li>Apply the zero-product rule: x = −p or x = −q</li></ol><p><strong>Example:</strong> Solve x² + 5x + 6 = 0.<br>Need two numbers that multiply to 6 and add to 5. → 2 × 3 = 6, 2 + 3 = 5 ✓<br>So: (x + 2)(x + 3) = 0<br>x + 2 = 0 → <strong>x = −2</strong><br>x + 3 = 0 → <strong>x = −3</strong></p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>The Singapore Cross Method (for a ≠ 1)</h2><p>When the coefficient of x² is not 1, we use the <strong>cross method</strong> (also called the AC method). For ax² + bx + c:</p><ol><li>Multiply a × c to get a <strong>target product</strong></li><li>Find two numbers that <strong>multiply to ac</strong> and <strong>add to b</strong></li><li>Split the middle term using these two numbers</li><li>Group and factorise by taking out common factors</li></ol><p><strong>Example:</strong> Solve 2x² + 7x + 3 = 0.<br>a = 2, b = 7, c = 3. Target: ac = 2 × 3 = 6.<br>Find two numbers: multiply to 6, add to 7 → 1 and 6 ✓<br>Split middle: 2x² + 1x + 6x + 3 = 0<br>Group: x(2x + 1) + 3(2x + 1) = 0<br>Factorise: (x + 3)(2x + 1) = 0<br>x + 3 = 0 → <strong>x = −3</strong><br>2x + 1 = 0 → <strong>x = −½</strong></p>"
+    },
+    {
+      "id": "s5",
+      "type": "text",
+      "content": "<h2>Checking Your Answers and Negative/Fractional Roots</h2><p>Always check by substituting back. For x = −3 in 2x² + 7x + 3: 2(9) + 7(−3) + 3 = 18 − 21 + 3 = 0 ✓</p><p><strong>Sign patterns to remember:</strong></p><ul><li>x² + bx + c: if c is positive, both numbers have the same sign (both + or both −). The shared sign matches b.</li><li>x² + bx − c: if c is negative, one number is positive, one negative. The larger absolute value has the sign of b.</li></ul><p><strong>When factorisation fails</strong> (the discriminant b² − 4ac is not a perfect square), use the quadratic formula: x = (−b ± √(b²−4ac)) / 2a. The ± gives you both solutions at once.</p>"
+    },
+    {
+      "id": "s6",
+      "type": "text",
+      "content": "<h2>Forming and Solving Quadratics from Word Problems</h2><p>Many real-world problems lead to quadratic equations. The key steps are:</p><ol><li>Define a variable clearly (e.g. 'let x = the width in metres')</li><li>Express other quantities in terms of x using the information given</li><li>Form an equation using the constraint given (area, total, etc.)</li><li>Rearrange to ax² + bx + c = 0</li><li>Solve and check both roots — reject any that don't make sense in context (e.g. negative lengths)</li></ol><p><strong>Example:</strong> A rectangle's length is 3 more than its width. Area = 40 m². Find the width.<br>Let width = x. Length = x + 3. Area: x(x + 3) = 40 → x² + 3x − 40 = 0.<br>Find numbers: multiply to −40, add to 3 → 8 and −5 ✓<br>(x + 8)(x − 5) = 0 → x = −8 (reject, length can't be negative) or <strong>x = 5 m</strong>.</p>"
+    }
+  ],
+  "lessonSummary": "The Singapore method solves quadratics by factorisation: for x² + bx + c = 0, find two numbers that multiply to c and add to b. For ax² + bx + c = 0 (a ≠ 1), use the cross method — multiply a×c, find two numbers that multiply to ac and add to b, then split, group and factorise. Always check solutions by substituting back, and reject roots that don't make sense in context.",
+  "quiz": {
+    "type": "open_ended",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Solve x² + 7x + 10 = 0 using the Singapore factorisation method. Show each step clearly: identify the two numbers you need, write the factorised form, and state both solutions."
+      },
+      {
+        "id": "q2",
+        "question": "Solve x² − 3x − 18 = 0 by factorisation. Explain why one of your solutions is negative and verify both answers by substituting them back into the original equation."
+      },
+      {
+        "id": "q3",
+        "question": "Solve 3x² + 11x + 6 = 0 using the Singapore cross method. Show the step where you calculate the target product (a×c), identify the pair of numbers, split the middle term, group, and factorise."
+      },
+      {
+        "id": "q4",
+        "question": "Solve 4x² − 12x + 9 = 0. What is special about the solutions you get? What does this tell you about the graph of y = 4x² − 12x + 9?"
+      },
+      {
+        "id": "q5",
+        "question": "A rectangular swimming pool has an area of 60 m². Its length is 7 metres more than its width. Define a variable, form a quadratic equation, solve it using the Singapore method, and state the dimensions of the pool. Show all working and explain why you reject one of the mathematical solutions."
+      }
+    ]
+  }
+}

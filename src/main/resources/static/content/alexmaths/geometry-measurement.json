@@ -1,0 +1,70 @@
+{
+  "id": "geometry-measurement",
+  "moduleId": "alexmaths",
+  "title": "Geometry & Measurement",
+  "duration": 12,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Angles and Parallel Lines</h2><p>A full turn is <strong>360°</strong>; a straight line is 180°; a right angle is 90°. When a line (transversal) crosses two parallel lines, it creates several angle pairs:</p><ul><li><strong>Corresponding angles</strong> — equal (same side, same position)</li><li><strong>Alternate angles</strong> — equal (Z-shape)</li><li><strong>Co-interior angles</strong> — add to 180° (C-shape)</li></ul><p>The interior angles of any triangle add to 180°. The interior angles of a quadrilateral add to 360°. For any polygon: sum of interior angles = (n − 2) × 180°, where n is the number of sides.</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Key formulae:</strong> Area of triangle = ½ × base × height. Area of circle = πr². Circumference = 2πr. Volume of cuboid = l × w × h. Volume of cylinder = πr²h. Pythagoras: a² + b² = c² (right-angled triangle, c is hypotenuse)."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Pythagoras' Theorem</h2><p>In any right-angled triangle, the square of the <strong>hypotenuse</strong> (the side opposite the right angle) equals the sum of the squares of the other two sides: <strong>a² + b² = c²</strong>.</p><p>To find the hypotenuse: c = √(a² + b²). Example: a = 3, b = 4 → c = √(9 + 16) = √25 = 5. (The 3-4-5 triangle is the most famous Pythagorean triple.)</p><p>To find a shorter side: a = √(c² − b²). Example: c = 13, b = 5 → a = √(169 − 25) = √144 = 12.</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Trigonometry in Right-Angled Triangles</h2><p>For a right-angled triangle with angle θ, the three sides are labelled relative to θ: <strong>opposite</strong> (O), <strong>adjacent</strong> (A), and <strong>hypotenuse</strong> (H). The three trig ratios are:</p><ul><li>sin θ = O/H</li><li>cos θ = A/H</li><li>tan θ = O/A</li></ul><p>Mnemonic: <strong>SOH CAH TOA</strong>. To find a missing angle, use the inverse function: θ = sin⁻¹(O/H), etc.</p>"
+    },
+    {
+      "id": "s5",
+      "type": "text",
+      "content": "<h2>Circles and Arcs</h2><p>A circle with radius r has area πr² and circumference 2πr. An <strong>arc</strong> is a portion of the circumference; a <strong>sector</strong> is a 'pie slice'. For a sector with angle θ (in degrees):</p><ul><li>Arc length = (θ/360) × 2πr</li><li>Sector area = (θ/360) × πr²</li></ul><p>A <strong>chord</strong> is a straight line across the circle. The perpendicular from the centre to a chord bisects it — useful for finding missing lengths.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "A right-angled triangle has legs 5 cm and 12 cm. What is the hypotenuse?",
+        "options": ["13 cm", "17 cm", "√119 cm", "60 cm"],
+        "correct": 0,
+        "explanation": "c² = 5² + 12² = 25 + 144 = 169. c = √169 = 13 cm. This is the 5-12-13 Pythagorean triple."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "What is the sum of interior angles of a hexagon?",
+        "options": ["540°", "720°", "900°", "360°"],
+        "correct": 1,
+        "explanation": "(n − 2) × 180° = (6 − 2) × 180° = 4 × 180° = 720°."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "sin 30° = ?",
+        "options": ["½", "√3/2", "1/√2", "√3"],
+        "correct": 0,
+        "explanation": "sin 30° = 0.5 = ½. The exact values sin 30° = ½, sin 45° = 1/√2, sin 60° = √3/2 are worth memorising."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "A circle has radius 5 cm. What is its area? (Use π ≈ 3.14)",
+        "options": ["15.7 cm²", "31.4 cm²", "78.5 cm²", "157 cm²"],
+        "correct": 2,
+        "explanation": "Area = πr² = 3.14 × 5² = 3.14 × 25 = 78.5 cm²."
+      }
+    ]
+  }
+}

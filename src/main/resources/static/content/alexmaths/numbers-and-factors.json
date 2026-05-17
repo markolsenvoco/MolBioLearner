@@ -1,0 +1,70 @@
+{
+  "id": "numbers-and-factors",
+  "moduleId": "alexmaths",
+  "title": "Numbers, Factors & Primes",
+  "duration": 10,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Types of Numbers</h2><p>Numbers come in different families. <strong>Natural numbers</strong> (1, 2, 3, …) are what you use to count. <strong>Integers</strong> include negatives too (…, −2, −1, 0, 1, 2, …). <strong>Rational numbers</strong> can be written as a fraction — ½, −3, 0.75 are all rational. <strong>Irrational numbers</strong> like √2 and π cannot be written as exact fractions; their decimals go on forever without repeating.</p><p>Understanding which type of number you're working with matters — it determines what operations are valid and what form your answer should be in.</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Key words:</strong> <em>Factor</em> — a number that divides exactly into another. <em>Multiple</em> — the result of multiplying a number by an integer. <em>Prime</em> — a number with exactly two factors: 1 and itself."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Factors, Multiples & Prime Numbers</h2><p>The <strong>factors</strong> of 12 are: 1, 2, 3, 4, 6, 12 — every number that divides into 12 exactly. The <strong>multiples</strong> of 4 are 4, 8, 12, 16, 20, … — the 4 times table going on forever.</p><p><strong>Prime numbers</strong> (2, 3, 5, 7, 11, 13, …) are the atoms of arithmetic — every other whole number can be broken down into primes. The process is called <strong>prime factorisation</strong>: 60 = 2 × 2 × 3 × 5 = 2² × 3 × 5. This is useful for finding HCF and LCM.</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>HCF and LCM</h2><p>The <strong>Highest Common Factor (HCF)</strong> of two numbers is the largest factor they share. To find it, write out the prime factorisation of each and multiply the common prime factors together.</p><p>Example: HCF(24, 36). 24 = 2³ × 3, 36 = 2² × 3². Common factors: 2² × 3 = 12. So HCF = 12.</p><p>The <strong>Lowest Common Multiple (LCM)</strong> is the smallest number both divide into. Take each prime factor at its highest power: LCM(24, 36) = 2³ × 3² = 72.</p><p>A quick check: HCF × LCM = product of the two numbers (24 × 36 = 864 = 12 × 72 ✓).</p>"
+    },
+    {
+      "id": "s5",
+      "type": "text",
+      "content": "<h2>Index (Power) Notation</h2><p>Instead of writing 2 × 2 × 2 × 2, we write 2⁴ (read: '2 to the power 4'). The base is 2, the index (exponent) is 4. Key rules:</p><ul><li><strong>Multiplying same base:</strong> aᵐ × aⁿ = aᵐ⁺ⁿ</li><li><strong>Dividing same base:</strong> aᵐ ÷ aⁿ = aᵐ⁻ⁿ</li><li><strong>Power of a power:</strong> (aᵐ)ⁿ = aᵐⁿ</li><li><strong>Zero power:</strong> a⁰ = 1 (for any non-zero a)</li></ul><p>These laws will come up constantly in algebra, so practise them until they're automatic.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Which of the following is a prime number?",
+        "options": ["9", "15", "17", "21"],
+        "correct": 2,
+        "explanation": "17 has exactly two factors: 1 and 17. It cannot be divided evenly by any other whole number. 9 = 3², 15 = 3×5, 21 = 3×7 — all composite."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "What is the HCF of 18 and 24?",
+        "options": ["3", "6", "12", "72"],
+        "correct": 1,
+        "explanation": "18 = 2 × 3², 24 = 2³ × 3. Common factors: 2¹ × 3¹ = 6. So HCF = 6."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "What is 3⁴?",
+        "options": ["12", "27", "64", "81"],
+        "correct": 3,
+        "explanation": "3⁴ = 3 × 3 × 3 × 3 = 9 × 9 = 81."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "Which of these is an irrational number?",
+        "options": ["0.333...", "¾", "√5", "−7"],
+        "correct": 2,
+        "explanation": "√5 ≈ 2.2360679… — it never terminates or repeats, so it is irrational. 0.333… = ⅓ (rational), ¾ is rational, −7 is an integer (rational)."
+      }
+    ]
+  }
+}

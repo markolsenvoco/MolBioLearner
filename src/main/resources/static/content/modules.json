@@ -14,6 +14,20 @@
       ]
     },
     {
+      "id": "alexmaths",
+      "title": "Alex's Maths",
+      "description": "Numbers, algebra, quadratics, graphs and geometry — Year 10 and beyond.",
+      "icon": "📐",
+      "level": 1,
+      "lessons": [
+        { "id": "numbers-and-factors",    "title": "Numbers, Factors & Primes",          "duration": 10, "quizCount": 4 },
+        { "id": "algebra-basics",         "title": "Algebra Basics",                     "duration": 12, "quizCount": 4 },
+        { "id": "quadratic-equations",    "title": "Solving Quadratic Equations",        "duration": 20, "quizCount": 5 },
+        { "id": "graphs-and-functions",   "title": "Graphs & Functions",                 "duration": 15, "quizCount": 4 },
+        { "id": "geometry-measurement",   "title": "Geometry & Measurement",             "duration": 12, "quizCount": 4 }
+      ]
+    },
+    {
       "id": "biochem",
       "title": "Biochemistry",
       "description": "The four classes of biomolecules, metabolism, and enzyme function.",

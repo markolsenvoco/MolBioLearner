@@ -1,0 +1,70 @@
+{
+  "id": "graphs-and-functions",
+  "moduleId": "alexmaths",
+  "title": "Graphs & Functions",
+  "duration": 15,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>The Coordinate Plane</h2><p>A <strong>coordinate plane</strong> (Cartesian plane) has two axes: the horizontal <em>x</em>-axis and the vertical <em>y</em>-axis, crossing at the <strong>origin</strong> (0, 0). Every point is described by an ordered pair (x, y). Moving right increases x; moving up increases y; left and down give negative values.</p><p>Plotting points precisely and reading coordinates from a graph are fundamental skills — all of functions, statistics, and calculus are communicated through graphs.</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Straight-line equation:</strong> y = mx + c, where <em>m</em> is the gradient (slope) and <em>c</em> is the y-intercept (where the line crosses the y-axis). Gradient = rise ÷ run = (y₂ − y₁)/(x₂ − x₁)."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Linear Graphs</h2><p>Any equation of the form y = mx + c produces a straight line. To sketch it: (1) plot the y-intercept (0, c); (2) use the gradient to find a second point (go 1 right, m up); (3) draw through both points.</p><p>Two lines are <strong>parallel</strong> if they have the same gradient. Two lines are <strong>perpendicular</strong> if their gradients multiply to −1 (e.g. gradient 2 is perpendicular to gradient −½).</p><p>To find the equation of a line through two points, first calculate m, then substitute one point into y = mx + c to find c.</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Quadratic Graphs</h2><p>The graph of y = ax² + bx + c is a <strong>parabola</strong> — a smooth U-shape (or ∩ if a &lt; 0). Key features:</p><ul><li><strong>Vertex</strong> — the minimum (or maximum) point, at x = −b/(2a)</li><li><strong>Axis of symmetry</strong> — vertical line x = −b/(2a)</li><li><strong>y-intercept</strong> — always at (0, c)</li><li><strong>x-intercepts (roots)</strong> — where the parabola crosses the x-axis; found by solving ax² + bx + c = 0</li></ul>"
+    },
+    {
+      "id": "s5",
+      "type": "text",
+      "content": "<h2>Functions</h2><p>A <strong>function</strong> is a rule that turns every input into exactly one output. We write f(x) to mean 'the function f, applied to x'. For example, f(x) = 2x + 1 means: double the input and add 1. So f(3) = 7.</p><p>The set of valid inputs is the <strong>domain</strong>; the set of possible outputs is the <strong>range</strong>. You can't divide by zero, and you can't take the square root of a negative (in real numbers) — these restrictions define the domain.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "What is the gradient of the line y = −3x + 7?",
+        "options": ["7", "3", "−3", "−7"],
+        "correct": 2,
+        "explanation": "In y = mx + c, m is the gradient. Here m = −3. The 7 is the y-intercept, not the gradient."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "For the parabola y = x² − 4x + 3, what is the axis of symmetry?",
+        "options": ["x = −2", "x = 2", "x = 3", "x = 4"],
+        "correct": 1,
+        "explanation": "Axis of symmetry: x = −b/(2a) = −(−4)/(2×1) = 4/2 = 2."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "If f(x) = x² + 2x, what is f(−3)?",
+        "options": ["−3", "3", "15", "−15"],
+        "correct": 1,
+        "explanation": "f(−3) = (−3)² + 2(−3) = 9 − 6 = 3."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "Two lines have gradients 4 and k. They are perpendicular. What is k?",
+        "options": ["4", "−4", "¼", "−¼"],
+        "correct": 3,
+        "explanation": "Perpendicular gradients multiply to −1: 4 × k = −1, so k = −¼."
+      }
+    ]
+  }
+}
