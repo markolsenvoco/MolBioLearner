@@ -83,7 +83,7 @@ function app() {
         if (this.currentLesson?.quiz?.type === 'open_ended') {
           await this.loadPreviousOpenAnswers(lesson.id);
         }
-        this.loadFeedback(lesson.id);
+        await this.loadFeedback(lesson.id);
         fetch(`/api/progress/lesson/${lesson.id}/view`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -128,7 +128,7 @@ function app() {
           // Clear pre-filled answer for any question that has received feedback
           Object.keys(this.lessonFeedback).forEach(qId => {
             if (this.lessonFeedback[qId]?.length > 0) {
-              delete this.openAnswers[qId];
+              this.openAnswers[qId] = '';
             }
           });
         }
