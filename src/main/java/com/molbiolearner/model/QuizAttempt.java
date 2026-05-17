@@ -1,10 +1,24 @@
 package com.molbiolearner.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "quiz_attempts")
@@ -22,19 +36,40 @@ public class QuizAttempt {
     @Column(nullable = false)
     private String lessonId;
 
-    private int score;
-    private int totalQuestions;
-    private Instant attemptedAt;
+    @Column(nullable = false)
+    private String moduleId;
 
-    @Column(columnDefinition = "TEXT")
-    private String answersJson;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private QuizType quizType;
 
-    public QuizAttempt(String userId, String lessonId, int score, int totalQuestions, String answersJson) {
-        this.userId = userId;
-        this.lessonId = lessonId;
-        this.score = score;
-        this.totalQuestions = totalQuestions;
-        this.answersJson = answersJson;
-        this.attemptedAt = Instant.now();
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AttemptStatus status;
+
+    private Integer score;
+    private Integer totalQuestions;
+
+    @Column(nullable = false)
+    private int attemptNumber;
+
+    private Instant submittedAt;
+
+    @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<QuizAnswer> answers = new ArrayList<>();
+
+    public void addAnswer(QuizAnswer answer) {
+        answer.setAttempt(this);
+        answers.add(answer);
+    }
+
+    public void setAnswers(List<QuizAnswer> answers) {
+        this.answers.clear();
+        if (answers != null) {
+            answers.forEach(this::addAnswer);
+        }
     }
 }

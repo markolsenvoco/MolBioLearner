@@ -9,13 +9,14 @@ if /i "%1"=="compile" goto compile
 if /i "%1"=="test"    goto test
 if /i "%1"=="build"   goto build
 if /i "%1"=="clean"   goto clean
+if /i "%1"=="resetdb" goto resetdb
 echo Unknown command: %1
-echo Usage: run [run^|compile^|test^|build^|clean]
+echo Usage: run [run^|compile^|test^|build^|clean^|resetdb]
 goto end
 
 :run
 echo Starting MolBioLearner... open http://localhost:8080 ^(Ctrl+C to stop^)
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=local
 goto end
 
 :compile
@@ -36,6 +37,16 @@ goto end
 :clean
 echo Cleaning...
 mvn clean
+goto end
+
+:resetdb
+echo Resetting database (deleting data folder)...
+if exist data (
+  rmdir /s /q data
+  echo Done. Run 'run' to start with a fresh database.
+) else (
+  echo No data folder found - nothing to reset.
+)
 goto end
 
 :end

@@ -169,7 +169,7 @@
         </div>
 
         <!-- Quiz -->
-        <div x-show="currentLesson.quiz" class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+        <div x-show="currentLesson.quiz && (currentLesson.quiz.type === 'multiple_choice' || !currentLesson.quiz.type)" class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
           <h2 class="text-xl font-bold text-blue-800 mb-1">📝 Quiz</h2>
           <p class="text-sm text-gray-400 mb-6" x-text="currentLesson.quiz?.questions?.length + ' questions — score ≥70% to complete the lesson'"></p>
 
@@ -212,6 +212,52 @@
             <div class="flex gap-3">
               <button @click="retryQuiz()" class="flex-1 py-2 rounded-xl border border-blue-300 text-blue-700 hover:bg-blue-50 font-semibold text-sm">Try Again</button>
               <button @click="view='module'" class="flex-1 py-2 rounded-xl bg-blue-700 text-white hover:bg-blue-800 font-semibold text-sm">Next Lesson →</button>
+            </div>
+          </div>
+        </div>
+
+        <div x-show="currentLesson?.quiz?.type === 'open_ended'" class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+          <h2 class="text-xl font-bold text-blue-800 mb-1">✍️ Open-Ended Questions</h2>
+          <p class="text-sm text-gray-400 mb-1" x-text="currentLesson.quiz?.questions?.length + ' questions'"></p>
+          <p x-show="previousOpenAttempt" class="text-xs text-blue-500 mb-6"
+             x-text="'Showing your previous answers from attempt #' + previousOpenAttempt?.attemptNumber + '. Edit and resubmit anytime.'"></p>
+          <p x-show="!previousOpenAttempt" class="text-xs text-gray-400 mb-6">Your answers are saved each time you submit. You can submit multiple attempts.</p>
+
+          <div x-show="!openQuizSubmitted">
+            <template x-for="(q, qi) in currentLesson.quiz.questions" :key="q.id">
+              <div class="mb-6">
+                <p class="font-semibold text-gray-800 mb-2" x-text="(qi+1) + '. ' + q.question"></p>
+                <textarea
+                  x-model="openAnswers[q.id]"
+                  rows="5"
+                  class="w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 resize-y"
+                  placeholder="Enter your answer here..."></textarea>
+              </div>
+            </template>
+            <button @click="submitOpenQuiz()"
+                    :disabled="!allOpenAnswered()"
+                    class="w-full py-3 rounded-xl font-semibold text-white transition-colors"
+                    :class="allOpenAnswered() ? 'bg-blue-700 hover:bg-blue-800' : 'bg-gray-300 cursor-not-allowed'">
+              Submit Answers
+            </button>
+          </div>
+
+          <div x-show="openQuizSubmitted" class="text-center">
+            <div class="text-5xl mb-3">✅</div>
+            <p class="text-2xl font-bold mb-1">Answers submitted!</p>
+            <p class="text-gray-500 mb-6">
+              Attempt #<span x-text="previousOpenAttempt?.attemptNumber"></span> saved.
+              Your instructor will review your answers and provide feedback.
+            </p>
+            <div class="flex gap-3 justify-center">
+              <button @click="openQuizSubmitted=false"
+                      class="flex-1 py-2 rounded-xl border border-blue-300 text-blue-700 hover:bg-blue-50 font-semibold text-sm">
+                Submit Another Attempt
+              </button>
+              <button @click="view='module'"
+                      class="flex-1 py-2 rounded-xl bg-blue-700 text-white hover:bg-blue-800 font-semibold text-sm">
+                Back to Module →
+              </button>
             </div>
           </div>
         </div>

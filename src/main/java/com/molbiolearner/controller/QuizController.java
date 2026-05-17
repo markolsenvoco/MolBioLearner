@@ -1,14 +1,19 @@
 package com.molbiolearner.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.molbiolearner.service.ProgressService;
+import com.molbiolearner.model.QuizType;
+import com.molbiolearner.service.QuizService;
 import com.molbiolearner.util.UserIdentity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -18,24 +23,32 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class QuizController {
 
-    private final ProgressService progressService;
-    private final ObjectMapper objectMapper;
+    private final QuizService quizService;
 
-    @PostMapping("/submit/{lessonId}")
-    public ResponseEntity<?> submitQuiz(@AuthenticationPrincipal OAuth2User user,
-                                         @PathVariable String lessonId,
-                                         @RequestBody Map<String, Object> body) throws JsonProcessingException {
+    @PostMapping("/attempt/{lessonId}")
+    public ResponseEntity<?> submitAttempt(@AuthenticationPrincipal OAuth2User user,
+                                           @PathVariable String lessonId,
+                                           @RequestBody Map<String, Object> body) {
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         String userId = UserIdentity.userId(user);
-        String moduleId = (String) body.getOrDefault("moduleId", "unknown");
-        int score = (int) body.getOrDefault("score", 0);
-        int total = (int) body.getOrDefault("total", 0);
+        String moduleId = String.valueOf(body.getOrDefault("moduleId", "unknown"));
+        QuizType quizType = QuizType.valueOf(body.get("quizType").toString().toUpperCase());
 
         @SuppressWarnings("unchecked")
-        List<Object> answers = (List<Object>) body.getOrDefault("answers", List.of());
-        String answersJson = objectMapper.writeValueAsString(answers);
+        List<Map<String, Object>> answers = (List<Map<String, Object>>) body.getOrDefault("answers", List.of());
 
-        return ResponseEntity.ok(
-            progressService.submitQuiz(userId, lessonId, moduleId, score, total, answersJson)
-        );
+        return ResponseEntity.ok(quizService.submit(userId, lessonId, moduleId, quizType, answers));
+    }
+
+    @GetMapping("/previous/{lessonId}")
+    public ResponseEntity<?> getPrevious(@AuthenticationPrincipal OAuth2User user,
+                                         @PathVariable String lessonId) {
+        if (user == null) {
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.ok(quizService.getLatestAttempt(UserIdentity.userId(user), lessonId).orElse(null));
     }
 }

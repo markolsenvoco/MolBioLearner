@@ -13,6 +13,9 @@ function app() {
     quizAnswers: {},
     quizSubmitted: false,
     quizScore: 0,
+    openAnswers: {},
+    openQuizSubmitted: false,
+    previousOpenAttempt: null,
 
     async init() {
       await Promise.all([this.loadModules(), this.loadUser(), this.loadUserInfo()]);
@@ -36,7 +39,6 @@ function app() {
         const data = await res.json();
         this.summary = data.summary;
 
-        // Build completed lessons set and per-module counts
         const counts = {};
         const completed = new Set();
         (data.progress || []).forEach(p => {
@@ -48,11 +50,10 @@ function app() {
         });
         this.completedLessons = completed;
         this.progress = counts;
-      } catch (e) { /* not logged in */ }
+      } catch (e) { }
     },
 
     async loadUserInfo() {
-      // Spring Security exposes the OAuth2 user principal at /user (we'll add this endpoint)
       try {
         const res = await fetch('/api/user');
         if (res.ok) this.userInfo = await res.json();
@@ -68,12 +69,18 @@ function app() {
       this.currentLesson = null;
       this.lessonLoading = true;
       this.quizAnswers = {};
+      this.openAnswers = {};
+      this.openQuizSubmitted = false;
+      this.previousOpenAttempt = null;
       this.quizSubmitted = false;
+      this.quizScore = 0;
       this.view = 'lesson';
       try {
         const res = await fetch(`/api/lessons/${this.currentModule.id}/${lesson.id}`);
         this.currentLesson = await res.json();
-        // Mark lesson as viewed (requires auth; silently ignored if not logged in)
+        if (this.currentLesson?.quiz?.type === 'open_ended') {
+          await this.loadPreviousOpenAnswers(lesson.id);
+        }
         fetch(`/api/progress/lesson/${lesson.id}/view`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -91,9 +98,35 @@ function app() {
       this.view = 'progress';
     },
 
+    async loadPreviousOpenAnswers(lessonId) {
+      try {
+        const res = await fetch(`/api/quiz/previous/${lessonId}`);
+        if (res.ok) {
+          const text = await res.text();
+          const attempt = text ? JSON.parse(text) : null;
+          if (attempt?.answers?.length) {
+            this.previousOpenAttempt = attempt;
+            attempt.answers.forEach(ans => {
+              try {
+                const data = JSON.parse(ans.answerData);
+                if (data.text) this.openAnswers[ans.questionId] = data.text;
+              } catch (e) {}
+            });
+          }
+        }
+      } catch (e) {}
+    },
+
     allAnswered() {
       if (!this.currentLesson?.quiz) return false;
       return this.currentLesson.quiz.questions.every(q => this.quizAnswers[q.id] !== undefined);
+    },
+
+    allOpenAnswered() {
+      if (!this.currentLesson?.quiz?.questions) return false;
+      return this.currentLesson.quiz.questions.every(q =>
+        this.openAnswers[q.id] && this.openAnswers[q.id].trim().length > 0
+      );
     },
 
     async submitQuiz() {
@@ -102,25 +135,24 @@ function app() {
       const answers = questions.map(q => {
         const chosen = this.quizAnswers[q.id];
         if (chosen === q.correct) correct++;
-        return { questionId: q.id, chosen, correct: q.correct };
+        return { questionId: q.id, questionText: q.question, chosen, correct: q.correct };
       });
       this.quizScore = Math.round((correct / questions.length) * 100);
       this.quizSubmitted = true;
 
-      // Persist result if logged in
-      fetch(`/api/quiz/submit/${this.currentLesson.id}`, {
+      fetch(`/api/quiz/attempt/${this.currentLesson.id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           moduleId: this.currentModule.id,
-          score: correct,
-          total: questions.length,
+          quizType: 'MULTIPLE_CHOICE',
           answers
         })
       }).then(async res => {
         if (res.ok) {
           const p = await res.json();
-          if (p.completed) {
+          const passed = p.status === 'MARKED' && p.score >= Math.ceil(p.totalQuestions * 0.7);
+          if (passed && !this.completedLessons.has(this.currentLesson.id)) {
             this.completedLessons.add(this.currentLesson.id);
             const mod = this.progress[this.currentModule.id] || { completed: 0 };
             mod.completed = (mod.completed || 0) + 1;
@@ -128,6 +160,32 @@ function app() {
           }
         }
       }).catch(() => {});
+    },
+
+    async submitOpenQuiz() {
+      const questions = this.currentLesson.quiz.questions;
+      const answers = questions.map(q => ({
+        questionId: q.id,
+        questionText: q.question,
+        text: this.openAnswers[q.id] || ''
+      }));
+      try {
+        const res = await fetch(`/api/quiz/attempt/${this.currentLesson.id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            moduleId: this.currentModule.id,
+            quizType: 'OPEN_ENDED',
+            answers
+          })
+        });
+        if (res.ok) {
+          this.previousOpenAttempt = await res.json();
+          this.openQuizSubmitted = true;
+        }
+      } catch (e) {
+        console.error('Failed to submit open quiz', e);
+      }
     },
 
     retryQuiz() {

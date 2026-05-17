@@ -34,10 +34,10 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").hasRole("ADMIN")
                 // Public
                 .requestMatchers("/", "/index.html", "/js/**", "/content/**",
-                                 "/api/modules/**", "/api/lessons/**",
+                                 "/api/modules/**", "/api/lessons/**", "/api/quiz/previous/**",
                                  "/actuator/health").permitAll()
-                // Authenticated: progress and quiz
-                .requestMatchers("/api/progress/**", "/api/quiz/submit/**").authenticated()
+                // Authenticated: progress and quiz attempts
+                .requestMatchers("/api/progress/**", "/api/quiz/attempt/**").authenticated()
                 .anyRequest().permitAll()
             );
 
