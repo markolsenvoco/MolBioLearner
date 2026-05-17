@@ -19,9 +19,11 @@ public class UserController {
     public ResponseEntity<?> currentUser(@AuthenticationPrincipal OAuth2User user) {
         if (user == null) return ResponseEntity.status(401).build();
         Map<String, Object> info = new HashMap<>();
-        info.put("name",   UserIdentity.displayName(user));
-        info.put("avatar", UserIdentity.avatar(user));
-        info.put("userId", UserIdentity.userId(user));
+        info.put("name",     UserIdentity.displayName(user));
+        info.put("avatar",   UserIdentity.avatar(user));
+        info.put("userId",   UserIdentity.userId(user));
+        // "github" or "google" — used by frontend to show correct provider icon
+        info.put("provider", user.getAttribute("login") != null ? "github" : "google");
         return ResponseEntity.ok(info);
     }
 }

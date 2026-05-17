@@ -15,7 +15,7 @@ function app() {
     quizScore: 0,
 
     async init() {
-      await Promise.all([this.loadModules(), this.loadUser()]);
+      await Promise.all([this.loadModules(), this.loadUser(), this.loadUserInfo()]);
       this.loading = false;
     },
 
@@ -87,7 +87,6 @@ function app() {
     },
 
     async showProgress() {
-      if (!this.userInfo) await this.loadUserInfo();
       if (this.userInfo) await this.loadUser();
       this.view = 'progress';
     },
