@@ -210,11 +210,13 @@
                   <p class="text-xs" :class="quizAnswers[q.id]===q.correct ? 'text-green-700' : 'text-red-700'"
                      x-text="quizAnswers[q.id]===q.correct ? '✓ Correct' : '✗ Correct answer: ' + q.options[q.correct]"></p>
                   <p class="text-xs text-gray-500 mt-1 italic" x-text="q.explanation"></p>
-                  <!-- Inline feedback -->
+                <!-- Inline feedback (MC results) -->
                   <template x-for="fb in feedbackForQuestion(q.id)" :key="fb.attemptNumber">
-                    <div class="mt-2 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-                      <span class="text-xs font-bold text-amber-600">A<span x-text="fb.attemptNumber"></span> feedback: </span>
-                      <span class="text-xs text-amber-900" x-text="fb.feedback"></span>
+                    <div class="mt-2 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 text-xs">
+                      <span class="font-bold text-amber-600">A<span x-text="fb.attemptNumber"></span> feedback</span>
+                      <span class="text-amber-400 ml-1" x-text="'— ' + new Date(fb.submittedAt).toLocaleDateString()"></span>
+                      <p class="text-gray-500 italic mt-1">For your answer: "<span x-text="answerPreview(fb.answerData)"></span>"</p>
+                      <p class="text-amber-900 mt-0.5" x-text="fb.feedback"></p>
                     </div>
                   </template>
                 </div>
@@ -247,12 +249,13 @@
                   rows="5"
                   class="w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 resize-y"
                   placeholder="Enter your answer here..."></textarea>
-                <!-- Inline feedback -->
+                <!-- Inline feedback (OE) -->
                 <template x-for="fb in feedbackForQuestion(q.id)" :key="fb.attemptNumber">
-                  <div class="mt-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+                  <div class="mt-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm">
                     <span class="text-xs font-bold text-amber-600 uppercase tracking-wide">A<span x-text="fb.attemptNumber"></span> feedback</span>
-                    <span class="text-xs text-amber-500 ml-2" x-text="'— ' + new Date(fb.submittedAt).toLocaleDateString()"></span>
-                    <p class="text-sm text-amber-900 mt-1" x-text="fb.feedback"></p>
+                    <span class="text-xs text-amber-400 ml-2" x-text="'— ' + new Date(fb.submittedAt).toLocaleDateString()"></span>
+                    <p class="text-gray-500 italic text-xs mt-1 line-clamp-2">For your answer: "<span x-text="answerPreview(fb.answerData)"></span>"</p>
+                    <p class="text-amber-900 mt-1" x-text="fb.feedback"></p>
                   </div>
                 </template>
               </div>

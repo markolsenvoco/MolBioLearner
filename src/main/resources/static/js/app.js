@@ -218,11 +218,25 @@ function app() {
       (this.lessonFeedback || []).forEach(attempt => {
         (attempt.answers || []).forEach(ans => {
           if (ans.questionId === questionId) {
-            entries.push({ attemptNumber: attempt.attemptNumber, submittedAt: attempt.submittedAt, feedback: ans.feedback });
+            entries.push({
+              attemptNumber: attempt.attemptNumber,
+              submittedAt: attempt.submittedAt,
+              feedback: ans.feedback,
+              answerData: ans.answerData
+            });
           }
         });
       });
       return entries;
+    },
+
+    answerPreview(answerDataStr) {
+      try {
+        const d = typeof answerDataStr === 'string' ? JSON.parse(answerDataStr) : answerDataStr;
+        if (d?.type === 'open_ended') return d.answer || '';
+        if (d?.type === 'multiple_choice' && d.options) return d.options[d.chosen] || '';
+        return '';
+      } catch (e) { return ''; }
     },
 
     isCompleted(lessonId) {
