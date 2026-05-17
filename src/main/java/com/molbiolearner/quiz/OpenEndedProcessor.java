@@ -8,6 +8,7 @@ import com.molbiolearner.model.QuizAttempt;
 import com.molbiolearner.model.QuizType;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,11 @@ public class OpenEndedProcessor implements QuizProcessor {
             QuizAnswer answer = new QuizAnswer();
             answer.setQuestionId(stringValue(rawAnswer.get("questionId")));
             answer.setQuestionText(stringValue(rawAnswer.get("questionText")));
-            answer.setAnswerData(writeJson(objectMapper, Map.of("text", stringValue(rawAnswer.get("text")))));
+            Map<String, Object> data = new LinkedHashMap<>();
+            data.put("type", "open_ended");
+            data.put("question", stringValue(rawAnswer.get("questionText")));
+            data.put("answer", stringValue(rawAnswer.get("text")));
+            answer.setAnswerData(writeJson(objectMapper, data));
             answer.setScore(null);
             answer.setFeedback(null);
             attempt.addAnswer(answer);

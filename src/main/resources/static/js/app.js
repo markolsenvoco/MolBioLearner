@@ -109,7 +109,7 @@ function app() {
             attempt.answers.forEach(ans => {
               try {
                 const data = JSON.parse(ans.answerData);
-                if (data.text) this.openAnswers[ans.questionId] = data.text;
+                if (data.answer) this.openAnswers[ans.questionId] = data.answer;
               } catch (e) {}
             });
           }
@@ -135,7 +135,7 @@ function app() {
       const answers = questions.map(q => {
         const chosen = this.quizAnswers[q.id];
         if (chosen === q.correct) correct++;
-        return { questionId: q.id, questionText: q.question, chosen, correct: q.correct };
+        return { questionId: q.id, questionText: q.question, options: q.options, explanation: q.explanation, chosen, correct: q.correct };
       });
       this.quizScore = Math.round((correct / questions.length) * 100);
       this.quizSubmitted = true;

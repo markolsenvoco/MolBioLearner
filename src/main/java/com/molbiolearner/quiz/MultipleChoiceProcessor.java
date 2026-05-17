@@ -36,11 +36,15 @@ public class MultipleChoiceProcessor implements QuizProcessor {
             QuizAnswer answer = new QuizAnswer();
             answer.setQuestionId(stringValue(rawAnswer.get("questionId")));
             answer.setQuestionText(stringValue(rawAnswer.get("questionText")));
-            answer.setAnswerData(writeJson(objectMapper, new LinkedHashMap<>(Map.of(
-                "chosen", chosen,
-                "correct", correct,
-                "isCorrect", isCorrect
-            ))));
+            Map<String, Object> data = new LinkedHashMap<>();
+            data.put("type", "multiple_choice");
+            data.put("question", stringValue(rawAnswer.get("questionText")));
+            data.put("options", rawAnswer.get("options"));
+            data.put("chosen", chosen);
+            data.put("correct", correct);
+            data.put("isCorrect", isCorrect);
+            data.put("explanation", rawAnswer.get("explanation"));
+            answer.setAnswerData(writeJson(objectMapper, data));
             answer.setScore(isCorrect ? 1 : 0);
             attempt.addAnswer(answer);
         }
