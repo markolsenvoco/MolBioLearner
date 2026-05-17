@@ -126,10 +126,12 @@ function app() {
         if (res.ok) {
           this.lessonFeedback = await res.json();
           // Clear pre-filled answer for any question that has received feedback
-          Object.keys(this.lessonFeedback).forEach(qId => {
-            if (this.lessonFeedback[qId]?.length > 0) {
-              this.openAnswers[qId] = '';
-            }
+          (this.lessonFeedback || []).forEach(attempt => {
+            (attempt.answers || []).forEach(ans => {
+              if (ans.questionId && ans.feedback) {
+                this.openAnswers[ans.questionId] = '';
+              }
+            });
           });
         }
       } catch (e) {}
