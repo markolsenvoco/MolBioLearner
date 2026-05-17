@@ -41,4 +41,4 @@ management:
 
 app:
   dev-mode: ${DEV_MODE:true}
-  admin-email: ${ADMIN_EMAIL:mark.olsen@gmail.com}
+  admin-email: ${ADMIN_EMAIL:olsen.mark@gmail.com}
