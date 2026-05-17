@@ -213,6 +213,18 @@ function app() {
       } catch (e) { return ''; }
     },
 
+    feedbackForQuestion(questionId) {
+      const entries = [];
+      (this.lessonFeedback || []).forEach(attempt => {
+        (attempt.answers || []).forEach(ans => {
+          if (ans.questionId === questionId) {
+            entries.push({ attemptNumber: attempt.attemptNumber, submittedAt: attempt.submittedAt, feedback: ans.feedback });
+          }
+        });
+      });
+      return entries;
+    },
+
     isCompleted(lessonId) {
       return this.completedLessons.has(lessonId);
     },

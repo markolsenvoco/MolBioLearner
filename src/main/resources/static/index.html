@@ -210,6 +210,13 @@
                   <p class="text-xs" :class="quizAnswers[q.id]===q.correct ? 'text-green-700' : 'text-red-700'"
                      x-text="quizAnswers[q.id]===q.correct ? '✓ Correct' : '✗ Correct answer: ' + q.options[q.correct]"></p>
                   <p class="text-xs text-gray-500 mt-1 italic" x-text="q.explanation"></p>
+                  <!-- Inline feedback -->
+                  <template x-for="fb in feedbackForQuestion(q.id)" :key="fb.attemptNumber">
+                    <div class="mt-2 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+                      <span class="text-xs font-bold text-amber-600">A<span x-text="fb.attemptNumber"></span> feedback: </span>
+                      <span class="text-xs text-amber-900" x-text="fb.feedback"></span>
+                    </div>
+                  </template>
                 </div>
               </template>
             </div>
@@ -240,6 +247,14 @@
                   rows="5"
                   class="w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 resize-y"
                   placeholder="Enter your answer here..."></textarea>
+                <!-- Inline feedback -->
+                <template x-for="fb in feedbackForQuestion(q.id)" :key="fb.attemptNumber">
+                  <div class="mt-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wide">A<span x-text="fb.attemptNumber"></span> feedback</span>
+                    <span class="text-xs text-amber-500 ml-2" x-text="'— ' + new Date(fb.submittedAt).toLocaleDateString()"></span>
+                    <p class="text-sm text-amber-900 mt-1" x-text="fb.feedback"></p>
+                  </div>
+                </template>
               </div>
             </template>
             <button @click="submitOpenQuiz()"
@@ -269,34 +284,6 @@
             </div>
           </div>
         </div>
-
-          <!-- Instructor Feedback panel -->
-          <div x-show="lessonFeedback.length > 0" class="bg-amber-50 border border-amber-200 rounded-2xl shadow-sm p-6 mt-2">
-            <h2 class="text-lg font-bold text-amber-800 mb-4">💬 Instructor Feedback</h2>
-            <div class="space-y-5">
-              <template x-for="attempt in lessonFeedback" :key="attempt.attemptNumber">
-                <div>
-                  <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-2">
-                    A<span x-text="attempt.attemptNumber"></span>
-                    <span class="font-normal text-amber-500 ml-2 normal-case" x-text="'— ' + new Date(attempt.submittedAt).toLocaleDateString()"></span>
-                  </p>
-                  <div class="space-y-3">
-                    <template x-for="ans in attempt.answers" :key="ans.questionId">
-                      <div class="bg-white border border-amber-100 rounded-xl p-4">
-                        <p class="text-xs font-semibold text-gray-500 mb-1 uppercase" x-text="ans.questionId"></p>
-                        <p class="text-sm text-gray-700 mb-2 italic line-clamp-2"
-                           x-text="tryParseAnswer(ans.answerData)"></p>
-                        <p class="text-sm text-amber-900 leading-relaxed">
-                          <span class="font-semibold text-amber-700">💬 </span>
-                          <span x-text="ans.feedback"></span>
-                        </p>
-                      </div>
-                    </template>
-                  </div>
-                </div>
-              </template>
-            </div>
-          </div>
 
       </div>
     </template>
