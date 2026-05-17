@@ -2,85 +2,63 @@
   "id": "functional-groups",
   "moduleId": "orgchem",
   "title": "Functional Groups in Organic Chemistry",
-  "duration": 15,
+  "duration": 20,
   "sections": [
     {
       "id": "s1",
       "type": "text",
-      "content": "<h2>The Atom: Foundation of Chemistry</h2><p>All matter, including every molecule in a living cell, is made of <span class='key-term' title='Smallest unit of an element'>atoms</span>. An atom consists of a nucleus containing positively charged <strong>protons</strong> and neutral <strong>neutrons</strong>, surrounded by negatively charged <strong>electrons</strong> arranged in shells.</p><p>The number of protons defines the element (carbon always has 6 protons). The outermost shell — the <strong>valence shell</strong> — determines how an atom bonds to others. Carbon's valence shell holds 4 of its 8 possible electrons, so carbon always forms <strong>4 bonds</strong>. This tetravalency is why carbon is the backbone of all organic molecules.</p>"
+      "content": "<h2>What Is a Functional Group?</h2><p>A <span class='key-term' title='A specific atom or group of atoms responsible for the characteristic chemical reactions of a molecule'>functional group</span> is a specific arrangement of atoms within an organic molecule that determines how that molecule reacts chemically. The carbon skeleton (hydrocarbon backbone) is largely inert — it is the functional groups attached to it that give each molecule its identity, reactivity, and biological role.</p><p>Think of functional groups as the <em>verbs</em> of chemistry: the carbon backbone is just scaffolding, but functional groups are what actually <em>do</em> things — donate protons, form esters, accept electrons, or participate in hydrogen bonding. Recognising a functional group tells you immediately what chemistry is possible.</p>"
     },
     {
       "id": "s2",
-      "type": "callout",
-      "content": "<strong>🔑 Key atoms in biology:</strong> <strong>C</strong>arbon (4 bonds), <strong>H</strong>ydrogen (1 bond), <strong>O</strong>xygen (2 bonds), <strong>N</strong>itrogen (3 bonds), <strong>P</strong>hosphorus (5 bonds), <strong>S</strong>ulfur (2 or 6 bonds). The mnemonic <em>CHONPS</em> covers the six most abundant elements in life."
+      "type": "text",
+      "content": "<h2>The Major Functional Groups in Biology</h2><h3>Hydroxyl (–OH)</h3><p>The <span class='key-term' title='–OH group; makes molecules polar and able to form hydrogen bonds'>hydroxyl group</span> consists of an oxygen bonded to a hydrogen. It is highly polar and participates in hydrogen bonding, making molecules that carry it (<strong>alcohols</strong>) water-soluble. In biology, hydroxyl groups are found on sugars (e.g., glucose has five –OH groups), on the amino acid serine, threonine and tyrosine, and are frequent targets for <strong>phosphorylation</strong> during cell signalling.</p><h3>Carbonyl (C=O)</h3><p>A carbon double-bonded to oxygen is a <span class='key-term' title='C=O group; highly reactive due to polarised double bond'>carbonyl group</span>. Its location determines whether the molecule is an <strong>aldehyde</strong> (carbonyl at the end of the chain, as in glucose in its open form) or a <strong>ketone</strong> (carbonyl in the middle, as in fructose). The C=O bond is strongly polarised — the carbon is electrophilic, making carbonyls reactive centres in condensation and addition reactions.</p><h3>Carboxyl (–COOH)</h3><p>A <span class='key-term' title='–COOH group; acidic, can donate a proton'>carboxyl group</span> is a combination of a carbonyl and a hydroxyl on the same carbon. It can donate a proton (H⁺) to solution, acting as a weak acid (pKa ~4–5). Every amino acid has a carboxyl group, and <strong>fatty acids</strong> owe their acidic character to –COOH. In peptide bond formation, the carboxyl of one amino acid reacts with the amino group of the next, expelling water.</p><h3>Amino (–NH₂)</h3><p>The <span class='key-term' title='–NH₂ group; basic, can accept a proton'>amino group</span> contains nitrogen bonded to two hydrogens. It is a weak base — it can accept a proton to become –NH₃⁺. All amino acids carry an amino group (hence the name), and nucleobases in DNA and RNA also contain amino groups that form the hydrogen bonds responsible for base pairing.</p>"
     },
     {
       "id": "s3",
-      "type": "text",
-      "content": "<h2>Types of Chemical Bonds</h2><h3>Covalent Bonds</h3><p>When two atoms <em>share</em> electrons, they form a <span class='key-term' title='Bond formed by sharing electron pairs'>covalent bond</span>. These are strong bonds (150–400 kJ/mol) that define the structure of molecules. In a <strong>polar covalent bond</strong>, electrons are shared unequally — oxygen and nitrogen pull electrons toward themselves, creating partial charges (δ+ and δ−). This polarity is crucial for the behaviour of water and all biomolecules.</p><h3>Ionic Bonds</h3><p>When one atom <em>transfers</em> an electron to another, both gain stable configurations and the resulting opposite charges attract: an <span class='key-term' title='Bond formed by electrostatic attraction between oppositely charged ions'>ionic bond</span>. Important in protein structure and enzyme active sites, but relatively weak in aqueous environments.</p><h3>Hydrogen Bonds</h3><p>A <span class='key-term' title='Weak attraction between δ+ hydrogen and δ− O or N'>hydrogen bond</span> forms when a hydrogen already covalently bonded to an electronegative atom (O or N) is attracted to another electronegative atom. Individually weak (~20 kJ/mol), but collectively hydrogen bonds give water its remarkable properties and hold the two strands of the DNA double helix together.</p>"
+      "type": "callout",
+      "content": "<strong>🔑 Memory aid — the four core groups:</strong><br><strong>–OH</strong> (hydroxyl) → <em>hydrogen bonds, water solubility</em><br><strong>C=O</strong> (carbonyl) → <em>reactive electrophilic carbon</em><br><strong>–COOH</strong> (carboxyl) → <em>acidic, releases H⁺</em><br><strong>–NH₂</strong> (amino) → <em>basic, accepts H⁺</em>"
     },
     {
       "id": "s4",
       "type": "text",
-      "content": "<h2>Electronegativity & Polarity</h2><p><span class='key-term' title='The tendency of an atom to attract electron density'>Electronegativity</span> increases across a period (left→right) and up a group in the periodic table. Oxygen (3.44) and nitrogen (3.04) are far more electronegative than carbon (2.55) or hydrogen (2.20). This difference drives polarity in C–O, C–N, and O–H bonds — polarity that biological systems exploit for recognition, catalysis, and information storage.</p><ul><li>Non-polar bonds: C–H, C–C (ΔEN &lt; 0.5)</li><li>Polar covalent: C–O, C–N, O–H (ΔEN 0.5–1.9)</li><li>Ionic: Na–Cl (ΔEN &gt; 1.9)</li></ul>"
+      "content": "<h2>More Functional Groups You Will Encounter</h2><h3>Phosphate (–OPO₃²⁻)</h3><p>The <span class='key-term' title='Charged group carrying two negative charges at physiological pH; central to energy transfer'>phosphate group</span> carries two negative charges at physiological pH. It is the backbone of <strong>DNA and RNA</strong>, the energy-currency group in <strong>ATP</strong>, and the on/off switch in signal transduction (phosphorylation by kinases, dephosphorylation by phosphatases). The high-energy phosphoanhydride bonds in ATP release about 30 kJ/mol upon hydrolysis — energy that drives biosynthesis, active transport, and mechanical work.</p><h3>Sulfhydryl (–SH)</h3><p>Also called a thiol, the <span class='key-term' title='–SH group; found in cysteine; can form disulfide bonds'>sulfhydryl group</span> is found on the amino acid <strong>cysteine</strong>. Two –SH groups can be oxidised to form a <strong>disulfide bond</strong> (–S–S–), which covalently cross-links protein chains and is critical for the stability of secreted proteins (e.g., antibodies, insulin).</p><h3>Methyl (–CH₃)</h3><p>The <span class='key-term' title='–CH₃ group; non-polar; used as epigenetic mark'>methyl group</span> is non-polar and does not participate in hydrogen bonding. However, its addition to DNA bases (<strong>DNA methylation</strong>) or histone tails (<strong>histone methylation</strong>) by methyltransferase enzymes is a key epigenetic mechanism that regulates gene expression without changing the underlying DNA sequence.</p>"
     },
     {
       "id": "s5",
       "type": "text",
-      "content": "<h2>Why This Matters for Biology</h2><p>The combination of carbon's tetravalency, the polarity of C–O and C–N bonds, and the ability of hydrogen bonds to form and break quickly creates the chemical vocabulary of life. DNA stores information in hydrogen bonds between base pairs. Proteins fold because of hydrophobic collapse and hydrogen bonding. Enzymes catalyse reactions by manipulating bond polarity. Everything downstream in biochemistry and molecular biology builds on these atomic foundations.</p>"
+      "content": "<h2>Functional Groups and Water Solubility</h2><p>Whether a biological molecule dissolves in water or partitions into a lipid membrane depends almost entirely on its functional groups. Groups that can form hydrogen bonds with water — <strong>hydroxyl, carboxyl, amino, phosphate</strong> — are <span class='key-term' title='Water-loving; interacts favourably with water'>hydrophilic</span>. Non-polar groups — <strong>methyl, large hydrocarbon chains</strong> — are <span class='key-term' title='Water-fearing; does not interact favourably with water'>hydrophobic</span>.</p><p>Molecules with both hydrophilic and hydrophobic regions are <strong>amphipathic</strong>. Phospholipids are the classic example: a charged phosphate head (hydrophilic) attached to two fatty acid tails (hydrophobic). In water, phospholipids spontaneously form a <strong>bilayer</strong> — the architecture of every biological membrane — because this arrangement maximises favourable interactions and minimises unfavourable ones.</p>"
+    },
+    {
+      "id": "s6",
+      "type": "text",
+      "content": "<h2>Ionisation and pH</h2><p>Many functional groups change their charge depending on the pH of their environment. The <strong>Henderson–Hasselbalch equation</strong> (pH = pKa + log([A⁻]/[HA])) tells us the ratio of deprotonated to protonated form at any given pH. At physiological pH (≈7.4):</p><ul><li>Carboxyl groups (pKa ≈4.5) are almost fully deprotonated: –COO⁻</li><li>Amino groups (pKa ≈9) are almost fully protonated: –NH₃⁺</li><li>Histidine's imidazole (pKa ≈6) can be either form near physiological pH — which is why histidine is so common in enzyme active sites</li></ul><p>This pH-dependent ionisation is how enzymes titrate their active-site residues to precisely the charge state needed for catalysis.</p>"
+    },
+    {
+      "id": "s7",
+      "type": "callout",
+      "content": "<strong>🧪 Putting it together — reading a biomolecule:</strong> When you encounter an unfamiliar molecule, scan it systematically for functional groups. Each one tells a story: –OH groups suggest hydrogen bonding and enzyme recognition sites; –COOH suggests acidity and peptide bond potential; –NH₂ suggests basicity and nucleophilicity; phosphate suggests energy storage or nucleic acid backbone; –SH suggests a cysteine residue capable of disulfide bonding."
     }
   ],
   "quiz": {
+    "type": "open_ended",
+    "lessonSummary": "Functional groups are specific arrangements of atoms that determine the chemical behaviour of organic molecules. The major groups in biology are: hydroxyl (–OH), carbonyl (C=O), carboxyl (–COOH), amino (–NH₂), phosphate (–OPO₃²⁻), sulfhydryl (–SH), and methyl (–CH₃). Each group confers distinct properties — acid/base behaviour, hydrogen bonding capacity, reactivity, and solubility. Understanding functional groups allows you to predict how molecules will behave, interact, and react in biological systems.",
     "questions": [
       {
         "id": "q1",
-        "type": "multiple-choice",
-        "question": "How many covalent bonds does carbon typically form?",
-        "options": ["2", "3", "4", "6"],
-        "correct": 2,
-        "explanation": "Carbon has 4 valence electrons and needs 4 more to complete its octet, so it always forms 4 covalent bonds — making it ideal as the backbone of complex biological molecules."
+        "question": "Amino acids are the building blocks of proteins. Every amino acid has both an amino group (–NH₂) and a carboxyl group (–COOH). Explain how the acid–base properties of these two functional groups determine the overall charge of an amino acid at physiological pH (7.4), and why this matters for how amino acids behave in an aqueous cellular environment."
       },
       {
         "id": "q2",
-        "type": "multiple-choice",
-        "question": "Which type of bond holds the two strands of the DNA double helix together?",
-        "options": ["Ionic bonds", "Covalent bonds", "Hydrogen bonds", "Van der Waals forces"],
-        "correct": 2,
-        "explanation": "Hydrogen bonds between complementary base pairs (A–T and G–C) hold the two DNA strands together. They are weak individually but collectively provide stable yet reversible base pairing."
+        "question": "ATP (adenosine triphosphate) is the primary energy currency of the cell. Its energy storage depends on the phosphate functional groups it contains. Describe the chemical features of the phosphate group that make it suitable for energy storage and transfer, and explain what happens chemically when ATP is hydrolysed to ADP and inorganic phosphate."
       },
       {
         "id": "q3",
-        "type": "multiple-choice",
-        "question": "The mnemonic CHONPS refers to the six most abundant elements in living organisms. What does the 'P' stand for?",
-        "options": ["Potassium", "Phosphorus", "Platinum", "Protium"],
-        "correct": 1,
-        "explanation": "Phosphorus is essential in nucleotides (DNA, RNA, ATP), phospholipid membranes, and cell signalling via phosphorylation."
+        "question": "Phospholipids are described as amphipathic molecules. Using your knowledge of functional groups, explain what structural features make phospholipids amphipathic, and describe how this property drives the spontaneous formation of the lipid bilayer — the fundamental architecture of biological membranes."
       },
       {
         "id": "q4",
-        "type": "multiple-choice",
-        "question": "A C–O bond is described as polar covalent because:",
-        "options": [
-          "Carbon and oxygen have the same electronegativity",
-          "Oxygen is more electronegative than carbon, pulling electron density toward itself",
-          "The electrons are transferred completely from carbon to oxygen",
-          "The bond involves sharing of protons, not electrons"
-        ],
-        "correct": 1,
-        "explanation": "Oxygen (EN 3.44) is significantly more electronegative than carbon (EN 2.55), so it attracts the shared electrons more strongly, creating a partial negative charge on O and partial positive on C."
-      },
-      {
-        "id": "q5",
-        "type": "multiple-choice",
-        "question": "Which property of hydrogen bonds makes them particularly important in biological systems?",
-        "options": [
-          "They are the strongest bonds in biology",
-          "They are irreversible once formed",
-          "They are weak enough to form and break rapidly, enabling dynamic molecular interactions",
-          "They only form between identical molecules"
-        ],
-        "correct": 2,
-        "explanation": "The reversibility of hydrogen bonds (~20 kJ/mol) is crucial: DNA strands can separate for replication, proteins can unfold/refold, and enzyme–substrate interactions can be transient yet specific."
+        "question": "DNA methylation involves the addition of a methyl group (–CH₃) to cytosine bases in DNA. Given that the methyl group is non-polar and does not participate in hydrogen bonding or change the base-pairing rules of DNA, propose a mechanism by which methyl groups could still influence gene expression. What properties of the methyl group might allow it to affect how proteins interact with DNA?"
       }
     ]
   }
