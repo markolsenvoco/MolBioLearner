@@ -24,6 +24,7 @@ public class UserController {
         if (user == null) return ResponseEntity.status(401).build();
         Map<String, Object> info = new HashMap<>();
         info.put("name",     UserIdentity.displayName(user));
+        info.put("email",    UserIdentity.email(user));
         info.put("avatar",   UserIdentity.avatar(user));
         info.put("userId",   UserIdentity.userId(user));
         info.put("provider", user.getAttribute("login") != null ? "github" : "google");

@@ -23,6 +23,12 @@ public class UserIdentity {
         return "User";
     }
 
+    public static String email(OAuth2User user) {
+        Object email = user.getAttribute("email");
+        if (email != null) return email.toString();
+        return null;
+    }
+
     public static String avatar(OAuth2User user) {
         Object avatar = user.getAttribute("avatar_url");   // GitHub
         if (avatar != null) return avatar.toString();

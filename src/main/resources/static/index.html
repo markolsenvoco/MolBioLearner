@@ -57,7 +57,7 @@
             <!-- Avatar -->
             <img x-show="userInfo.avatar" :src="userInfo.avatar" class="w-6 h-6 rounded-full border border-gray-200" :alt="userInfo.name">
             <!-- Name -->
-            <span class="text-sm font-medium text-gray-700 max-w-[120px] truncate" x-text="userInfo.name"></span>
+            <span class="text-sm font-medium text-gray-700 max-w-[160px] truncate" x-text="userInfo.email || userInfo.name"></span>
             <!-- Sign out -->
             <a href="/logout" class="text-xs text-gray-400 hover:text-red-500 border-l border-gray-200 pl-2 ml-1">sign out</a>
             <!-- Admin marker link -->
