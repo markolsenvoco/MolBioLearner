@@ -1,0 +1,73 @@
+{
+  "id": "pythagoras-theorem",
+  "moduleId": "caleb-maths",
+  "title": "Pythagoras' Theorem",
+  "duration": 15,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Pythagoras' Theorem</h2><p>In any <strong>right-angled triangle</strong>, the square of the longest side (the <strong>hypotenuse</strong>) equals the sum of the squares of the other two sides.</p><p style='text-align:center; font-size:1.2rem; font-weight:bold; color:#1e3a5f;'>a² + b² = c²</p><p>where <strong>c</strong> is always the hypotenuse (the side opposite the right angle — always the longest side).</p><p><strong>Finding the hypotenuse:</strong><br>If a = 3, b = 4: c² = 3² + 4² = 9 + 16 = 25 → c = √25 = 5</p><p><strong>Finding a shorter side:</strong><br>If c = 13, b = 5: a² = 13² − 5² = 169 − 25 = 144 → a = √144 = 12</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Common Pythagorean triples to remember:</strong><br>• 3, 4, 5 (and multiples: 6-8-10, 9-12-15)<br>• 5, 12, 13<br>• 8, 15, 17<br>These are integer solutions to a² + b² = c²."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Checking for Right Angles</h2><p>You can check whether a triangle is right-angled by testing if a² + b² = c². If the equation holds true, it's a right-angled triangle; if not, it isn't.</p><p>Example: Is a triangle with sides 7, 24, 25 right-angled?<br>7² + 24² = 49 + 576 = 625 = 25². Yes! It is right-angled.</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Applications</h2><p>Pythagoras' theorem is used in real-world problems such as:<br>• Finding the diagonal of a rectangle: d² = l² + w²<br>• Finding the height of a ladder against a wall<br>• Finding distances on a coordinate grid: distance = √[(x₂−x₁)² + (y₂−y₁)²]</p><p>Example: A ladder 10 m long leans against a wall. Its foot is 6 m from the wall. How high up the wall does it reach?<br>h² = 10² − 6² = 100 − 36 = 64 → h = 8 m</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Find the hypotenuse of a right triangle with legs 6 cm and 8 cm",
+        "options": ["10 cm", "14 cm", "√28 cm", "7 cm"],
+        "correct": 0,
+        "explanation": "c² = 6² + 8² = 36 + 64 = 100. c = √100 = 10 cm."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "A right triangle has a hypotenuse of 17 cm and one leg of 8 cm. Find the other leg.",
+        "options": ["9 cm", "15 cm", "√225 cm", "12 cm"],
+        "correct": 1,
+        "explanation": "a² = 17² − 8² = 289 − 64 = 225. a = √225 = 15 cm."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "A rectangle is 9 m long and 12 m wide. How long is its diagonal?",
+        "options": ["15 m", "21 m", "√108 m", "√225 m"],
+        "correct": 0,
+        "explanation": "d² = 9² + 12² = 81 + 144 = 225. d = √225 = 15 m."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "Is a triangle with sides 9, 40, and 41 right-angled?",
+        "options": ["Yes", "No", "Cannot be determined", "Only if the angle is 90°"],
+        "correct": 0,
+        "explanation": "Check: 9² + 40² = 81 + 1600 = 1681 = 41². Yes, it is right-angled."
+      },
+      {
+        "id": "q5",
+        "type": "multiple-choice",
+        "question": "Find the distance between points (1, 2) and (5, 5) on a coordinate grid",
+        "options": ["5", "√7", "4", "√25"],
+        "correct": 0,
+        "explanation": "Distance = √[(5−1)² + (5−2)²] = √[16 + 9] = √25 = 5 units."
+      }
+    ]
+  }
+}

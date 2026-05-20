@@ -1,0 +1,73 @@
+{
+  "id": "statistics-data",
+  "moduleId": "caleb-maths",
+  "title": "Statistics & Data Analysis",
+  "duration": 18,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Measures of Central Tendency</h2><p>These describe the 'middle' or 'typical' value in a data set:</p><p><strong>Mean:</strong> Add all values and divide by the number of values.<br>Example: 4, 7, 3, 9, 2 → Mean = (4+7+3+9+2) ÷ 5 = 25 ÷ 5 = 5</p><p><strong>Median:</strong> The middle value when data is ordered from smallest to largest. If there are two middle values, find the mean of those two.<br>Example: 2, 3, 4, 7, 9 → Median = 4</p><p><strong>Mode:</strong> The value that appears most often. Data can have one mode, more than one mode, or no mode.<br>Example: 2, 3, 3, 5, 7, 7, 7 → Mode = 7</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Range and Spread:</strong><br>• <strong>Range</strong> = maximum value − minimum value<br>• <strong>Interquartile Range (IQR)</strong> = Upper Quartile (Q3) − Lower Quartile (Q1)<br>The IQR is more robust than range as it ignores extreme values (outliers)."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Data Display</h2><p><strong>Stem-and-leaf plot:</strong> Shows the actual data values in order. The 'stem' is the leading digit(s), the 'leaves' are the final digits. Good for small data sets.</p><p><strong>Box-and-whisker plot (box plot):</strong> Shows 5-number summary — minimum, Q1, median, Q3, maximum. The box spans Q1 to Q3; the whiskers extend to min and max.</p><p><strong>Dot plots and frequency tables:</strong> Useful for small discrete data sets. Frequency tables show how many times each value occurs.</p><p>When choosing a graph type:<br>• Bar graph: comparing categories<br>• Line graph: changes over time<br>• Pie chart: parts of a whole<br>• Histogram: grouped continuous data</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Sampling and Bias</h2><p>A <strong>population</strong> is the entire group being studied. A <strong>sample</strong> is a subset of the population.</p><p>A <strong>random sample</strong> gives every member an equal chance of being selected and reduces bias. Common sources of bias include convenience sampling (only asking people nearby) and voluntary response (only motivated people respond).</p><p>The larger the sample size (and the more representative it is), the more reliable the statistics will be.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Find the mean of: 8, 4, 6, 10, 7, 3",
+        "options": ["5", "6.33", "6", "7"],
+        "correct": 1,
+        "explanation": "Sum = 8 + 4 + 6 + 10 + 7 + 3 = 38. Mean = 38 ÷ 6 ≈ 6.33."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "Find the median of: 3, 7, 2, 9, 5, 1, 8",
+        "options": ["5", "3", "7", "4"],
+        "correct": 0,
+        "explanation": "Ordered: 1, 2, 3, 5, 7, 8, 9. The middle value (4th of 7) is 5."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "What is the range of: 14, 7, 22, 5, 18?",
+        "options": ["7", "12", "17", "22"],
+        "correct": 2,
+        "explanation": "Range = maximum − minimum = 22 − 5 = 17."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "In the data set 2, 4, 4, 5, 7, 7, 7, 9, what is the mode?",
+        "options": ["4", "7", "5", "2"],
+        "correct": 1,
+        "explanation": "The mode is the most frequently occurring value. 7 appears 3 times, more than any other value."
+      },
+      {
+        "id": "q5",
+        "type": "multiple-choice",
+        "question": "A data set has Q1 = 12 and Q3 = 27. What is the Interquartile Range (IQR)?",
+        "options": ["39", "15", "19.5", "27"],
+        "correct": 1,
+        "explanation": "IQR = Q3 − Q1 = 27 − 12 = 15."
+      }
+    ]
+  }
+}

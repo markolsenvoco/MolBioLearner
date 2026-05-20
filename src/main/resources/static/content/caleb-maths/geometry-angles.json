@@ -1,0 +1,73 @@
+{
+  "id": "geometry-angles",
+  "moduleId": "caleb-maths",
+  "title": "Geometry: Angles & Triangles",
+  "duration": 15,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Angle Types and Rules</h2><p>Angles are measured in degrees (°). Key angle types:<br>• <strong>Acute:</strong> less than 90°<br>• <strong>Right:</strong> exactly 90°<br>• <strong>Obtuse:</strong> between 90° and 180°<br>• <strong>Straight:</strong> exactly 180°<br>• <strong>Reflex:</strong> between 180° and 360°</p><p>Important angle rules:<br>• Angles on a straight line add to 180°<br>• Angles at a point (full rotation) add to 360°<br>• Vertically opposite angles are equal<br>• Complementary angles add to 90°; supplementary angles add to 180°</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Parallel lines rules (when a transversal crosses parallel lines):</strong><br>• Co-interior (same-side interior) angles add to 180° (they're supplementary)<br>• Alternate angles are equal (Z-angles)<br>• Corresponding angles are equal (F-angles)"
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Triangles</h2><p>The three interior angles of any triangle always add to 180°.</p><p>Types of triangles:<br>• <strong>Equilateral:</strong> all 3 sides equal, all angles = 60°<br>• <strong>Isosceles:</strong> 2 sides equal, base angles equal<br>• <strong>Scalene:</strong> all sides different, all angles different<br>• <strong>Right-angled:</strong> one angle = 90°</p><p>The <strong>exterior angle</strong> of a triangle equals the sum of the two non-adjacent interior angles.</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Polygons</h2><p>The sum of interior angles in a polygon with n sides = (n − 2) × 180°.</p><p>Examples:<br>• Triangle (3 sides): (3−2) × 180° = 180°<br>• Quadrilateral (4 sides): (4−2) × 180° = 360°<br>• Pentagon (5 sides): (5−2) × 180° = 540°<br>• Hexagon (6 sides): (6−2) × 180° = 720°</p><p>For a <strong>regular polygon</strong>, each interior angle = total ÷ number of sides.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Two angles on a straight line are in the ratio 2:7. Find the smaller angle.",
+        "options": ["20°", "40°", "140°", "80°"],
+        "correct": 1,
+        "explanation": "Total = 180°. Parts = 2 + 7 = 9. Each part = 180 ÷ 9 = 20°. Smaller angle = 2 × 20 = 40°."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "A triangle has angles 47° and 68°. Find the third angle.",
+        "options": ["55°", "65°", "75°", "85°"],
+        "correct": 1,
+        "explanation": "Angles in a triangle add to 180°. Third angle = 180 − 47 − 68 = 65°."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "Two parallel lines are cut by a transversal. One co-interior angle is 115°. What is the other co-interior angle?",
+        "options": ["115°", "65°", "55°", "75°"],
+        "correct": 1,
+        "explanation": "Co-interior angles are supplementary (add to 180°). So the other angle = 180° − 115° = 65°."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "Find the sum of interior angles in a hexagon",
+        "options": ["540°", "720°", "900°", "360°"],
+        "correct": 1,
+        "explanation": "(6 − 2) × 180° = 4 × 180° = 720°."
+      },
+      {
+        "id": "q5",
+        "type": "multiple-choice",
+        "question": "An exterior angle of a triangle is 130°. The two non-adjacent interior angles are equal. Find each of these angles.",
+        "options": ["50°", "65°", "25°", "40°"],
+        "correct": 1,
+        "explanation": "The exterior angle equals the sum of the two non-adjacent interior angles: 130°. Each angle = 130° ÷ 2 = 65°."
+      }
+    ]
+  }
+}

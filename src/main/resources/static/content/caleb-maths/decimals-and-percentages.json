@@ -1,0 +1,73 @@
+{
+  "id": "decimals-and-percentages",
+  "moduleId": "caleb-maths",
+  "title": "Decimals & Percentages",
+  "duration": 12,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Decimals</h2><p>Decimals are another way to represent parts of a whole. The digits after the decimal point represent tenths, hundredths, thousandths, etc.</p><p>Example: 3.47 = 3 + 4/10 + 7/100</p><p><strong>Rounding decimals:</strong> Look at the digit after the place you're rounding to. If it's 5 or more, round up; if less than 5, leave unchanged.<br>Example: Round 3.476 to 2 decimal places → look at the 3rd decimal (6 ≥ 5), so round up → 3.48</p><p><strong>Significant figures (s.f.):</strong> Count from the first non-zero digit. 0.00456 to 2 s.f. = 0.0046 (first 2 significant digits are 4 and 5).</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Converting between fractions, decimals, percentages:</strong><br>• Fraction to decimal: divide top by bottom (¾ = 3÷4 = 0.75)<br>• Decimal to percentage: multiply by 100 (0.75 × 100 = 75%)<br>• Percentage to decimal: divide by 100 (35% = 0.35)"
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Percentages</h2><p>Per cent means 'per hundred'. 35% means 35 out of every 100.</p><p><strong>Finding a percentage of an amount:</strong> Convert the percentage to a decimal and multiply.<br>Example: 30% of $240 = 0.30 × 240 = $72</p><p><strong>Percentage increase/decrease:</strong><br>New value = Original × (1 + rate) for increase<br>New value = Original × (1 − rate) for decrease<br>Example: Increase $80 by 15% → $80 × 1.15 = $92</p><p><strong>Finding the original value:</strong> If a price after 20% increase is $120, original = $120 ÷ 1.20 = $100.</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>GST and Percentage Change</h2><p>In New Zealand, GST (Goods and Services Tax) is 15%. To add GST: multiply by 1.15. To find the pre-GST price: divide by 1.15.</p><p><strong>Percentage change formula:</strong><br>% change = (change ÷ original) × 100<br>Example: Price goes from $50 to $65. Change = $15. % change = (15÷50) × 100 = 30% increase.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Round 7.385 to 2 decimal places",
+        "options": ["7.38", "7.39", "7.40", "7.4"],
+        "correct": 1,
+        "explanation": "Look at the 3rd decimal place (5). Since 5 ≥ 5, round up the 8 to 9. Answer: 7.39."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "What is 25% of $360?",
+        "options": ["$72", "$90", "$80", "$25"],
+        "correct": 1,
+        "explanation": "25% = 0.25. So 0.25 × 360 = $90."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "A jacket costs $160. It is reduced by 15%. What is the new price?",
+        "options": ["$136", "$184", "$145", "$24"],
+        "correct": 0,
+        "explanation": "New price = $160 × (1 − 0.15) = $160 × 0.85 = $136."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "A price including 15% GST is $69. What was the pre-GST price?",
+        "options": ["$58.65", "$60", "$59.57", "$54"],
+        "correct": 1,
+        "explanation": "Pre-GST price = $69 ÷ 1.15 = $60."
+      },
+      {
+        "id": "q5",
+        "type": "multiple-choice",
+        "question": "The population of a town increased from 4000 to 4600. What was the percentage increase?",
+        "options": ["15%", "13%", "12.5%", "6%"],
+        "correct": 0,
+        "explanation": "Change = 4600 − 4000 = 600. % increase = (600/4000) × 100 = 15%."
+      }
+    ]
+  }
+}

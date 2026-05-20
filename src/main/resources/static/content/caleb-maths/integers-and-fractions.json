@@ -1,0 +1,73 @@
+{
+  "id": "integers-and-fractions",
+  "moduleId": "caleb-maths",
+  "title": "Integers & Fractions",
+  "duration": 10,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Integers</h2><p>Integers are whole numbers — positive, negative, or zero: …−3, −2, −1, 0, 1, 2, 3… When adding and subtracting integers, think about a number line. Moving right means adding, moving left means subtracting.</p><p>Rules for signs:<br>• (+) + (+) = positive → 4 + 3 = 7<br>• (−) + (−) = negative → −4 + (−3) = −7<br>• Adding a negative is the same as subtracting: 5 + (−3) = 5 − 3 = 2</p><p>For multiplication and division:<br>• Same signs → positive result: (−3) × (−4) = 12<br>• Different signs → negative result: (−3) × 4 = −12</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Tip:</strong> Two negatives multiplied together always make a positive. Remember: <em>minus times minus equals plus</em>."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Fractions</h2><p>A fraction represents part of a whole. The <strong>numerator</strong> (top) tells how many parts you have; the <strong>denominator</strong> (bottom) tells how many equal parts the whole is divided into.</p><p><strong>Adding/Subtracting fractions:</strong> You must have a common denominator first.<br>Example: ½ + ¼ → convert ½ = 2/4, then 2/4 + 1/4 = 3/4.</p><p><strong>Multiplying fractions:</strong> Multiply numerators together and denominators together.<br>Example: ⅔ × ¾ = (2×3)/(3×4) = 6/12 = ½</p><p><strong>Dividing fractions:</strong> Flip the second fraction and multiply (Keep, Change, Flip).<br>Example: ¾ ÷ ½ = ¾ × 2/1 = 6/4 = 1½</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Mixed Numbers and Improper Fractions</h2><p>A <strong>mixed number</strong> has a whole part and a fraction part: 2¾. An <strong>improper fraction</strong> has a numerator larger than the denominator: 11/4. To convert 2¾ → improper: (2×4)+3 = 11, so 11/4. To convert 11/4 → mixed: 11÷4 = 2 remainder 3, so 2¾.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Calculate: −6 + (−4)",
+        "options": ["10", "−10", "2", "−2"],
+        "correct": 1,
+        "explanation": "Adding two negatives gives a bigger negative: −6 + (−4) = −10."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "Calculate: (−5) × (−3)",
+        "options": ["−15", "15", "8", "−8"],
+        "correct": 1,
+        "explanation": "Same signs give a positive: (−5) × (−3) = +15."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "Calculate: ⅔ + ¼",
+        "options": ["3/7", "11/12", "6/8", "5/6"],
+        "correct": 1,
+        "explanation": "Common denominator of 3 and 4 is 12. ⅔ = 8/12 and ¼ = 3/12. So 8/12 + 3/12 = 11/12."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "Convert 3⅖ to an improper fraction",
+        "options": ["17/5", "15/5", "8/5", "23/5"],
+        "correct": 0,
+        "explanation": "Multiply the whole number by the denominator and add the numerator: (3×5)+2 = 17. So 3⅖ = 17/5."
+      },
+      {
+        "id": "q5",
+        "type": "multiple-choice",
+        "question": "Calculate: ¾ ÷ ½",
+        "options": ["3/8", "1½", "1¼", "6/4"],
+        "correct": 1,
+        "explanation": "Keep, Change, Flip: ¾ ÷ ½ = ¾ × 2/1 = 6/4 = 1½."
+      }
+    ]
+  }
+}

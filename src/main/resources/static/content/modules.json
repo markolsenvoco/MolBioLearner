@@ -14,6 +14,26 @@
       ]
     },
     {
+      "id": "caleb-maths",
+      "title": "Caleb's Maths",
+      "description": "Year 9 maths — numbers, algebra, geometry, measurement, statistics and probability.",
+      "icon": "🔢",
+      "level": 1,
+      "lessons": [
+        { "id": "integers-and-fractions",   "title": "Integers & Fractions",                     "duration": 10, "quizCount": 5 },
+        { "id": "decimals-and-percentages", "title": "Decimals & Percentages",                    "duration": 12, "quizCount": 5 },
+        { "id": "ratios-and-rates",         "title": "Ratios & Rates",                            "duration": 12, "quizCount": 5 },
+        { "id": "algebra-expressions",      "title": "Algebra: Expressions & Equations",          "duration": 15, "quizCount": 5 },
+        { "id": "measurement-area-volume",  "title": "Measurement: Area & Volume",                "duration": 15, "quizCount": 5 },
+        { "id": "pythagoras-theorem",       "title": "Pythagoras' Theorem",                       "duration": 15, "quizCount": 5 },
+        { "id": "geometry-angles",          "title": "Geometry: Angles & Triangles",              "duration": 15, "quizCount": 5 },
+        { "id": "linear-graphs",            "title": "Linear Graphs & Coordinates",               "duration": 18, "quizCount": 5 },
+        { "id": "statistics-data",          "title": "Statistics & Data Analysis",                "duration": 18, "quizCount": 5 },
+        { "id": "probability",              "title": "Probability",                               "duration": 15, "quizCount": 5 },
+        { "id": "algebra-simultaneous",     "title": "Simultaneous Equations & Inequalities",     "duration": 20, "quizCount": 5 }
+      ]
+    },
+    {
       "id": "alexmaths",
       "title": "Alex's Maths",
       "description": "Numbers, algebra, quadratics, graphs and geometry — Year 10 and beyond.",

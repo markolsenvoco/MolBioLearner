@@ -1,0 +1,73 @@
+{
+  "id": "algebra-expressions",
+  "moduleId": "caleb-maths",
+  "title": "Algebra: Expressions & Equations",
+  "duration": 15,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Algebraic Expressions</h2><p>An algebraic expression uses letters to represent unknown numbers. <strong>Like terms</strong> have the same variable(s) with the same powers and can be collected together.</p><p>Examples of collecting like terms:<br>3x + 5x = 8x<br>4y − 2y + 3 = 2y + 3<br>2x² + 3x − x² + x = x² + 4x</p><p><strong>Expanding brackets:</strong> Multiply every term inside the bracket by the term outside.<br>3(2x − 4) = 6x − 12<br>−2(x + 5) = −2x − 10</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 FOIL for double brackets:</strong> (a+b)(c+d) = ac + ad + bc + bd<br>Example: (x+3)(x−2) = x² − 2x + 3x − 6 = x² + x − 6"
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Solving Linear Equations</h2><p>To solve an equation, perform the same operation to both sides to isolate the unknown. Work in reverse order of operations (BODMAS backwards).</p><p>Steps for 3x + 7 = 22:<br>1. Subtract 7 from both sides: 3x = 15<br>2. Divide both sides by 3: x = 5</p><p>Steps for 2(x − 3) = 10:<br>1. Expand: 2x − 6 = 10<br>2. Add 6: 2x = 16<br>3. Divide by 2: x = 8</p><p>For equations with the variable on both sides: 5x − 3 = 2x + 9<br>1. Subtract 2x: 3x − 3 = 9<br>2. Add 3: 3x = 12<br>3. Divide by 3: x = 4</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Forming and Solving Equations</h2><p>Word problems can often be solved by forming an equation. Identify the unknown, assign it a letter, write the equation, then solve.</p><p>Example: A number is doubled and then 5 is added, giving 17. Find the number.<br>Let the number be n: 2n + 5 = 17 → 2n = 12 → n = 6.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Simplify: 5x + 3y − 2x + y",
+        "options": ["3x + 4y", "7x + 2y", "3x + 2y", "7x + 4y"],
+        "correct": 0,
+        "explanation": "Collect like terms: (5x − 2x) + (3y + y) = 3x + 4y."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "Expand: 4(3x − 2)",
+        "options": ["12x − 2", "12x − 8", "7x − 6", "12x + 8"],
+        "correct": 1,
+        "explanation": "Multiply each term by 4: 4 × 3x = 12x and 4 × (−2) = −8. So 12x − 8."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "Solve: 4x − 5 = 19",
+        "options": ["x = 3", "x = 5", "x = 6", "x = 4"],
+        "correct": 2,
+        "explanation": "4x = 19 + 5 = 24, so x = 24 ÷ 4 = 6."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "Solve: 3x + 4 = x + 12",
+        "options": ["x = 8", "x = 4", "x = 3", "x = 16"],
+        "correct": 1,
+        "explanation": "Subtract x from both sides: 2x + 4 = 12. Subtract 4: 2x = 8. Divide by 2: x = 4."
+      },
+      {
+        "id": "q5",
+        "type": "multiple-choice",
+        "question": "Expand and simplify: (x + 5)(x − 3)",
+        "options": ["x² + 2x − 15", "x² − 2x − 15", "x² + 8x − 15", "x² − 15"],
+        "correct": 0,
+        "explanation": "FOIL: x·x = x², x·(−3) = −3x, 5·x = 5x, 5·(−3) = −15. Sum: x² + 2x − 15."
+      }
+    ]
+  }
+}

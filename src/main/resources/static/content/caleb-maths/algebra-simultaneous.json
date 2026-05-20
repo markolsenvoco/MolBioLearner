@@ -1,0 +1,73 @@
+{
+  "id": "algebra-simultaneous",
+  "moduleId": "caleb-maths",
+  "title": "Simultaneous Equations & Inequalities",
+  "duration": 20,
+  "sections": [
+    {
+      "id": "s1",
+      "type": "text",
+      "content": "<h2>Simultaneous Equations</h2><p>Simultaneous equations are two (or more) equations that are both true at the same time. We need to find values of x and y that satisfy both equations at once.</p><p><strong>Substitution method:</strong> Rearrange one equation to make one variable the subject, then substitute into the other equation.</p><p>Example: Solve simultaneously: y = 2x − 1 and 3x + y = 14<br>Substitute y = 2x − 1 into the second equation:<br>3x + (2x − 1) = 14 → 5x − 1 = 14 → 5x = 15 → x = 3<br>Then y = 2(3) − 1 = 5. Solution: x = 3, y = 5.</p>"
+    },
+    {
+      "id": "s2",
+      "type": "callout",
+      "content": "<strong>🔑 Elimination method:</strong> Add or subtract the equations to eliminate one variable. You may need to multiply one or both equations first to make coefficients equal.<br>Example: 2x + y = 9 and 2x − y = 5 → add them: 4x = 14 → x = 3.5, then y = 2."
+    },
+    {
+      "id": "s3",
+      "type": "text",
+      "content": "<h2>Graphical Method</h2><p>Each linear equation represents a straight line. The solution to the simultaneous equations is the point where the two lines <strong>intersect</strong>.</p><p>• If lines intersect at one point → one solution<br>• If lines are parallel (same gradient, different y-intercept) → no solution<br>• If lines are identical → infinitely many solutions</p>"
+    },
+    {
+      "id": "s4",
+      "type": "text",
+      "content": "<h2>Linear Inequalities</h2><p>An inequality shows that two expressions are not necessarily equal. Symbols: < (less than), > (greater than), ≤ (less than or equal), ≥ (greater than or equal).</p><p>Solving works the same as equations, <strong>except</strong>: when multiplying or dividing both sides by a <em>negative number</em>, you must <strong>flip the inequality sign</strong>.</p><p>Example: Solve −2x + 3 > 9<br>−2x > 6 → divide by −2 and flip: x < −3.</p><p>Represent solutions on a number line using open circles (< or >) for strict inequalities and closed circles (≤ or ≥) for inclusive ones.</p>"
+    }
+  ],
+  "quiz": {
+    "type": "multiple_choice",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multiple-choice",
+        "question": "Solve simultaneously: x + y = 10 and x − y = 4",
+        "options": ["x = 7, y = 3", "x = 3, y = 7", "x = 6, y = 4", "x = 8, y = 2"],
+        "correct": 0,
+        "explanation": "Add the equations: 2x = 14 → x = 7. Then y = 10 − 7 = 3."
+      },
+      {
+        "id": "q2",
+        "type": "multiple-choice",
+        "question": "Solve simultaneously: y = 3x and 2x + y = 15",
+        "options": ["x = 5, y = 15", "x = 3, y = 9", "x = 5, y = 10", "x = 3, y = 6"],
+        "correct": 1,
+        "explanation": "Substitute y = 3x into 2x + y = 15: 2x + 3x = 15 → 5x = 15 → x = 3. Then y = 9."
+      },
+      {
+        "id": "q3",
+        "type": "multiple-choice",
+        "question": "Solve the inequality: 4x − 3 > 9",
+        "options": ["x > 1.5", "x > 3", "x < 3", "x > 2"],
+        "correct": 1,
+        "explanation": "4x > 9 + 3 = 12. Divide by 4: x > 3."
+      },
+      {
+        "id": "q4",
+        "type": "multiple-choice",
+        "question": "Solve: −3x ≤ 12",
+        "options": ["x ≤ −4", "x ≥ −4", "x ≤ 4", "x ≥ 4"],
+        "correct": 1,
+        "explanation": "Divide by −3 and flip the inequality: x ≥ −4."
+      },
+      {
+        "id": "q5",
+        "type": "multiple-choice",
+        "question": "Two lines have equations y = 2x + 1 and y = 2x − 5. How many solutions do the simultaneous equations have?",
+        "options": ["One solution", "No solution", "Infinitely many", "Two solutions"],
+        "correct": 1,
+        "explanation": "Both lines have gradient 2 (they are parallel) but different y-intercepts. Parallel lines never intersect, so there is no solution."
+      }
+    ]
+  }
+}
