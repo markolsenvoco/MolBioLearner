@@ -55,6 +55,9 @@ public class QuizAttempt {
 
     private Instant submittedAt;
 
+    @Column
+    private String userEmail;
+
     @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     @ToString.Exclude

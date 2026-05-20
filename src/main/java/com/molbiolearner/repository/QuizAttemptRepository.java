@@ -24,7 +24,7 @@ public interface QuizAttemptRepository extends JpaRepository<QuizAttempt, Long> 
     @Query("SELECT COALESCE(MAX(a.attemptNumber), 0) FROM QuizAttempt a WHERE a.userId = ?1 AND a.lessonId = ?2")
     int findMaxAttemptNumber(String userId, String lessonId);
 
-    @Query("SELECT a.userId, COUNT(a), MAX(a.submittedAt) FROM QuizAttempt a GROUP BY a.userId ORDER BY a.userId")
+    @Query("SELECT a.userId, COUNT(a), MAX(a.submittedAt), MAX(a.userEmail) FROM QuizAttempt a GROUP BY a.userId ORDER BY a.userId")
     List<Object[]> findUserSummaries();
 
     @Query("SELECT DISTINCT a.moduleId, a.lessonId FROM QuizAttempt a WHERE a.userId = ?1 ORDER BY a.moduleId, a.lessonId")

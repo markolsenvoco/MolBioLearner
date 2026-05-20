@@ -38,13 +38,14 @@ public class QuizController {
         }
 
         String userId = UserIdentity.userId(user);
+        String userEmail = UserIdentity.email(user);
         String moduleId = String.valueOf(body.getOrDefault("moduleId", "unknown"));
         QuizType quizType = QuizType.valueOf(body.get("quizType").toString().toUpperCase());
 
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> answers = (List<Map<String, Object>>) body.getOrDefault("answers", List.of());
 
-        return ResponseEntity.ok(quizService.submit(userId, lessonId, moduleId, quizType, answers));
+        return ResponseEntity.ok(quizService.submit(userId, userEmail, lessonId, moduleId, quizType, answers));
     }
 
     @GetMapping("/previous/{lessonId}")

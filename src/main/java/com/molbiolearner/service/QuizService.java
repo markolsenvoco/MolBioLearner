@@ -25,13 +25,14 @@ public class QuizService {
     private final ObjectMapper objectMapper;
 
     @Transactional
-    public QuizAttempt submit(String userId, String lessonId, String moduleId, QuizType quizType,
+    public QuizAttempt submit(String userId, String userEmail, String lessonId, String moduleId, QuizType quizType,
                               List<Map<String, Object>> rawAnswers) {
         List<Map<String, Object>> answers = rawAnswers == null ? List.of() : rawAnswers;
         int nextAttemptNumber = quizAttemptRepository.findMaxAttemptNumber(userId, lessonId) + 1;
 
         QuizAttempt attempt = new QuizAttempt();
         attempt.setUserId(userId);
+        attempt.setUserEmail(userEmail);
         attempt.setLessonId(lessonId);
         attempt.setModuleId(moduleId);
         attempt.setQuizType(quizType);

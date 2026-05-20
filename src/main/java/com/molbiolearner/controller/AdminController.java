@@ -39,6 +39,7 @@ public class AdminController {
             info.put("userId", row[0]);
             info.put("attemptCount", row[1]);
             info.put("lastSeen", row[2]);
+                info.put("userEmail", row[3]);
             return info;
         }).collect(Collectors.toList());
     }

@@ -298,6 +298,8 @@ function markerApp() {
 
     userLabel(userId) {
       if (!userId) return '';
+      const u = this.users.find(u => u.userId === userId);
+      if (u && u.userEmail) return u.userEmail;
       if (userId.startsWith('google:')) return 'Google …' + userId.slice(-6);
       if (userId.startsWith('github:')) return 'GitHub @' + userId.replace('github:', '');
       return userId;
