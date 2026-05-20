@@ -20,6 +20,7 @@ spring:
       path: /h2-console
       settings:
         db-trace: false
+        web-allow-others: true
 
   security:
     oauth2:
