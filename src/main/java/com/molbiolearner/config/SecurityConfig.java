@@ -49,7 +49,9 @@ public class SecurityConfig {
                     .ignoringRequestMatchers("/h2-console/**", "/api/**"))
                 .headers(headers -> headers.frameOptions(f -> f.disable()));
         } else {
-            http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"));
+            http.csrf(csrf -> csrf
+                    .ignoringRequestMatchers("/h2-console/**", "/api/**"))
+                .headers(headers -> headers.frameOptions(f -> f.sameOrigin()));
         }
 
         http.oauth2Login(oauth2 -> oauth2
