@@ -3,6 +3,7 @@ set JAVA_HOME=C:\Users\MarkOlsen\jdk-25_windows-x64_bin\jdk-25.0.3
 set PATH=C:\Users\MarkOlsen\apache-maven-3.9.15-bin\apache-maven-3.9.15\bin;%JAVA_HOME%\bin;%PATH%
 cd /d %~dp0
 
+
 if "%1"=="" goto run
 if /i "%1"=="run"     goto run
 if /i "%1"=="compile" goto compile
